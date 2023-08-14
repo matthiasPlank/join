@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: summary/summary.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: summary/summary.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let tasks = []; 
+const taskremoteStorageKey = "board"; 
+let mobileWelcomeShowed = false ; 
+
+
+/**
+ * Initialisierung und laden der Daten vom Backend. Wird beim Öffnen der Summary aufgerufen.
+ */
+async function loadTasks(){
+    await getTasksFromLocalStorage(); 
+    checkMobileLogin(); 
+    setItemValues(); 
+    LogInCheck();
+   
+}
+
+/**
+ * Setzt die Werte in der HTML Oberfläche.
+ */
+function setItemValues(){
+    document.getElementById("tasksInBoard").innerHTML = tasks.length ; 
+    document.getElementById("tasksInProgress").innerHTML = tasks.filter(task => task.kanban == "in-progress").length; 
+    document.getElementById("tasksAwaitingFeedback").innerHTML = tasks.filter(task => task.kanban == "awaiting-feedback").length; 
+    document.getElementById("tasksUrgent").innerHTML = tasks.filter(task => task.priority == "urgent").length;  
+    document.getElementById("taskUrgentDate").innerHTML = getNextUrgentDate();  
+    document.getElementById("tasksToDo").innerHTML = tasks.filter(task => task.kanban == "to-do").length; 
+    document.getElementById("tasksDone").innerHTML = tasks.filter(task => task.kanban == "done").length; 
+}
+
+/**
+ * Überprüft mit welchem User eingeloggt wurde und setzt den Namen als Begrüßung in der HTML Oberfläche. 
+ */
+function LogInCheck(){
+  if (localStorage.getItem('username')) {
+    let username = localStorage.getItem('username');
+    document.getElementById("summaryUsername").innerHTML = username  ; 
+  } else {
+    document.getElementById("summaryUsername").innerHTML = 'Guest'
+  }
+}
+
+/**
+ * Lädt die Tasks vom RemoteStorage/Backend.
+ */
+async function getTasksFromLocalStorage(){ /* ACHTUNG: NUR TESTDATEN*/
+        try {
+          const response = await getItem(taskremoteStorageKey);
+          tasks =  JSON.parse(response);
+        } catch (error) {
+          console.log(error);
+          tasks =  [];
+        }
+}
+
+/**
+ * Ermittelt und gibt das nächste fällige Datum für "urgent-Taks" zurück.
+ * @returns Datum als String
+ */
+function getNextUrgentDate(){
+  let urgent = tasks.filter(task => task.priority == "urgent"); 
+  if ( urgent.length > 0 ) {
+    urgent = urgent.sort (function(a,b){
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    });
+    return urgent[0].dueDate; 
+  }
+  else {
+    return "No urgent task"; 
+  }
+}
+
+/**
+ * Überprüft ob es sich sich um den ersten Aufruf der Summaryseite nach dem Login handelt und zeigt ggf. den Wilkommensbildschirm an. 
+ */
+function checkMobileLogin(){
+  mobileWelcomeShowed = localStorage.getItem('login'); 
+
+  if ( window.matchMedia('screen and (max-width: 800px)').matches &amp;&amp; mobileWelcomeShowed === "true") {
+ 
+      localStorage.setItem('login', false); 
+      document.getElementById("summaryWelcome").classList.remove("summaryWelcome");
+      document.getElementById("summaryWelcome").classList.add("welcomeMobile");
+      document.getElementById("summaryWelcome").classList.add("welcomeMobileOpacity");
+      setTimeout(() => {
+        document.getElementById("summaryWelcome").classList.remove("welcomeMobile");
+        document.getElementById("summaryWelcome").classList.add("summaryWelcome");
+        document.getElementById("summaryWelcome").classList.remove("welcomeMobileOpacity");
+      }, "2000");
+  } 
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#LogInCheck">LogInCheck</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addNewContact">addNewContact</a></li><li><a href="global.html#addNewTask">addNewTask</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#assigned">assigned</a></li><li><a href="global.html#back">back</a></li><li><a href="global.html#backChange">backChange</a></li><li><a href="global.html#changeSubtaskStatus">changeSubtaskStatus</a></li><li><a href="global.html#checkLogin">checkLogin</a></li><li><a href="global.html#checkMobileLogin">checkMobileLogin</a></li><li><a href="global.html#checkPW">checkPW</a></li><li><a href="global.html#closeAddNewTask">closeAddNewTask</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#closeTask">closeTask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#currentDraggedElement">currentDraggedElement</a></li><li><a href="global.html#currentEditingIndex">currentEditingIndex</a></li><li><a href="global.html#deleteEditedContact">deleteEditedContact</a></li><li><a href="global.html#deleteMobile">deleteMobile</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editMobile">editMobile</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#emailCheck">emailCheck</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#forgotPW">forgotPW</a></li><li><a href="global.html#generateUniqueId">generateUniqueId</a></li><li><a href="global.html#getBoardFromRemoteStorage">getBoardFromRemoteStorage</a></li><li><a href="global.html#getContactsFromRemoteStorage">getContactsFromRemoteStorage</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#getNextUrgentDate">getNextUrgentDate</a></li><li><a href="global.html#getTasksFromLocalStorage">getTasksFromLocalStorage</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#handleContactCheckboxChange">handleContactCheckboxChange</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#isValidEmail">isValidEmail</a></li><li><a href="global.html#loadArray">loadArray</a></li><li><a href="global.html#loadBoard">loadBoard</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadSignUp">loadSignUp</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#loadUser">loadUser</a></li><li><a href="global.html#loginscreen">loginscreen</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openContactDetails">openContactDetails</a></li><li><a href="global.html#openMenu">openMenu</a></li><li><a href="global.html#openMobileVersion">openMobileVersion</a></li><li><a href="global.html#openPage">openPage</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#priorityLow">priorityLow</a></li><li><a href="global.html#priorityLowAddTask">priorityLowAddTask</a></li><li><a href="global.html#priorityMedium">priorityMedium</a></li><li><a href="global.html#priorityMediumAddTask">priorityMediumAddTask</a></li><li><a href="global.html#priorityUrgent">priorityUrgent</a></li><li><a href="global.html#priorityUrgentAddTask">priorityUrgentAddTask</a></li><li><a href="global.html#remoteStorageKeyTest">remoteStorageKeyTest</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#renderContactForm">renderContactForm</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#resetCheckboxes">resetCheckboxes</a></li><li><a href="global.html#resetPW">resetPW</a></li><li><a href="global.html#resetPriority">resetPriority</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#saveEditedContact">saveEditedContact</a></li><li><a href="global.html#setBoardToRemoteStorage">setBoardToRemoteStorage</a></li><li><a href="global.html#setContactIconBackground">setContactIconBackground</a></li><li><a href="global.html#setContactsToRemoteStorage">setContactsToRemoteStorage</a></li><li><a href="global.html#setFieldsToStandard">setFieldsToStandard</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setItemValues">setItemValues</a></li><li><a href="global.html#setMinDateAttribute">setMinDateAttribute</a></li><li><a href="global.html#setSubtasks">setSubtasks</a></li><li><a href="global.html#showAwaitingFeedbackBoard">showAwaitingFeedbackBoard</a></li><li><a href="global.html#showContacts">showContacts</a></li><li><a href="global.html#showDoneBoard">showDoneBoard</a></li><li><a href="global.html#showFilteredTasks">showFilteredTasks</a></li><li><a href="global.html#showInProgressBoard">showInProgressBoard</a></li><li><a href="global.html#showToDoBoard">showToDoBoard</a></li><li><a href="global.html#sortContact">sortContact</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#taskAddedReport">taskAddedReport</a></li><li><a href="global.html#tasks">tasks</a></li><li><a href="global.html#updateAssignedArray">updateAssignedArray</a></li><li><a href="global.html#updateAssignedContacts">updateAssignedContacts</a></li><li><a href="global.html#updateHTML">updateHTML</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userCheck">userCheck</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jun 02 2023 22:29:55 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

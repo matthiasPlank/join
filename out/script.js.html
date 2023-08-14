@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Ein Array zur Speicherung der Benutzerdaten.
+ */
+let user = [];
+
+
+async function init() {
+    loadUser();
+    /*
+    await setItem('user', JSON.stringify(user));
+    console.log("set empty user");
+    */ 
+}
+
+
+/**
+ * Lädt die Benutzerdaten aus dem Backend.
+ */
+async function loadUser() {
+    try {
+        user = JSON.parse(await getItem('user'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
+
+/**
+ * Überprüft, ob eine E-Mail gültig ist.
+ * Gibt true zurück, wenn die E-Mail gültig ist, andernfalls false.
+ */
+function isValidEmail(email) {
+    return email.includes('@');
+  }
+
+
+  /**
+ * Event-Listener, der aufgerufen wird, wenn das DOM geladen ist.
+ * Elemente für Anmeldescreen, Registrierungsscreen, Passwort vergessen-Screen,Passwort ändern Screen.
+ */
+  let loginscreen, signupscreen, forgotPW1, changePW;
+
+  window.addEventListener('DOMContentLoaded', function() {
+    loginscreen = document.getElementById('login-screen');
+    signupscreen = document.getElementById('sign-up-screen');
+    forgotPW1 = document.getElementById('forgotPW');
+    changePW = document.getElementById('changePW');
+    signupButton = document.getElementById('signup-screen');
+  });
+
+
+  /**
+ * Öffnet eine bestimmte Seite basierend auf dem angegebenen Parameter.
+ */
+function openPage(page) {
+    if (page === "log-in") {
+        checkLogin()
+    } else  if (page === "summary") {
+        localStorage.setItem('login', true);
+        window.location.href = "./summary/summary.html";
+    } else if (page === "sign-up") {
+        loadSignUp();
+    } else if (page === "back") {
+        back();
+    } else if (page === "forgotPW") {
+        forgotPW();
+    }else if (page === "backChange") {
+        backChange();
+    }
+}
+
+
+  /**
+ * Führt eine Gastanmeldung durch.
+ */
+function guestLogin(){
+       document.getElementById("summaryUsername").innerHTML = 'Guest'  ; 
+}
+
+  /**
+ * Lädt das Registrierungsformular.
+ */
+function loadSignUp() {
+    loginscreen.style.display = 'none';
+    signupButton.style.display = 'none';
+    signupscreen.style.display = 'flex';
+}
+
+
+  /**
+ * Zeigt den Bildschirm zum Zurücksetzen des Passworts an.
+ */
+function forgotPW() {
+    loginscreen.style.display = 'none';
+    signupButton.style.display = 'none';
+    forgotPW1.style.display = 'flex';
+}
+
+/**
+*Geht zurück zum Anmeldebildschirm.
+*/
+function back() {
+    loginscreen.style.display = 'flex';
+    signupButton.style.display = 'flex';
+    signupscreen.style.display = 'none';
+    forgotPW1.style.display = 'none';
+}
+
+
+/**
+*Wechselt zur vorherigen Ansicht (Passwort ändern).
+*/
+function  backChange(){
+    forgotPW1.style.display = 'flex';
+    changePW.style.display = 'none';
+}
+
+/**
+*Setzt das Passwort zurück.
+*/
+  function resetPW() {
+    let emailInput = document.getElementById('email-forgot');
+    let emailValue = emailInput.value;
+  
+    if (emailValue !== '' &amp;&amp; isValidEmail(emailValue)) {
+      document.getElementById('email-forgot').value=''
+      emailCheck()
+  
+      animationInfo.addEventListener('animationend', function() {
+        animationInfo.style.display = 'none';
+      }, { once: true });
+    } else {
+        alert('bitte eine gültige email eingeben')
+    }
+  }
+
+  /**
+*Überprüft die E-Mail und zeigt Animationen an.
+*/
+function emailCheck() {
+  let animationInfo = document.getElementById('animation-info');
+  animationInfo.style.display = 'flex';
+  forgotPW1.style.display = 'none';
+  loginscreen.style.display = 'none';
+  signupButton.style.display = 'none';
+  changePW.style.display = 'flex';
+
+  // Füge den Event-Listener für 'animationend' hinzu
+  animationInfo.addEventListener('animationend', function() {
+    // Animation ist abgeschlossen
+    animationInfo.style.display = 'none';
+  }, { once: true }); // { once: true } sorgt dafür, dass der Event-Listener nur einmalig ausgeführt wird
+}
+
+
+/**
+*Überprüft das eingegebene Passwort und führt entsprechende Aktionen aus.
+*/
+  function checkPW() {
+    let newPasswordInput = document.getElementById('new-password');
+    let confirmPasswordInput = document.getElementById('confirm-password');
+  
+    let newPassword = newPasswordInput.value;
+    let confirmPassword = confirmPasswordInput.value;
+  
+    if (newPassword !== '' &amp;&amp; confirmPassword !== '' &amp;&amp; newPassword === confirmPassword) {
+      let animationReset = document.getElementById('animation-reset');
+
+      confirmPasswordInput.value = ''
+      newPasswordInput.value = ''
+
+      animationReset.style.display = 'flex';
+      changePW.style.display = 'none';
+      loginscreen.style.display = 'flex';
+      signupButton.style.display = 'flex';
+  
+      animationReset.addEventListener('animationend', function() {
+        animationReset.style.display = 'none';
+      }, { once: true });
+    } else {
+      alert('Bitte geben Sie gültige Passwörter ein.');
+    }
+  }
+ 
+  
+/**
+*Überprüft den Login und führt entsprechende Aktionen aus.
+*/
+  function checkLogin() {
+    let emailInput = document.getElementById('log-in-email');
+    let passwordInput = document.getElementById('log-in-pw');
+    let email = emailInput.value;
+    let password = passwordInput.value;
+    let foundUser = user.find(function (user) {
+      return user.email === email &amp;&amp; user.password === password;
+    });
+  
+    if (foundUser) {
+        userCheck(foundUser, emailInput, passwordInput)
+    } else {
+      alert('Die E-Mail-Adresse oder das Passwort ist ungültig.');
+    }
+  }
+
+
+/**
+Überprüft den Benutzer.
+*/
+  function userCheck(foundUser, emailInput, passwordInput){
+    document.getElementById('current-user').textContent = '';
+    document.getElementById('current-user').textContent = 'Angemeldet ist der Benutzer: ' + foundUser.name;
+    console.log('Name des Benutzers:', foundUser.name);
+    alert(`user " ${foundUser.name} " ist angemeldet`)
+    localStorage.setItem('username', foundUser.name);
+    localStorage.setItem('login', true);
+    emailInput.value = '';
+    passwordInput.value = '';
+    window.location.href = "./summary/summary.html";
+  }
+  
+
+document.addEventListener('DOMContentLoaded', function () {
+  let nameInput = document.getElementById('name');
+  let email = document.getElementById('email');
+  let password = document.getElementById('password');
+  let registerBtn = document.getElementById('registerBtn');
+
+  /**
+ * Registriert einen neuen Benutzer.
+ */
+  async function register() {
+    if (nameInput.value === '' || email.value === '' || password.value === '') {
+      alert('Bitte füllen Sie alle Felder aus.');
+      return;
+    }
+
+    if (!isValidEmail(email.value)) {
+      alert('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+      return;
+    }
+
+    if (isUserAlreadyRegistered(nameInput.value, email.value)) {
+      alert('Der Name oder die E-Mail-Adresse ist bereits vergeben.');
+      return;
+    }
+
+    registerBtn.disabled = true;
+
+    user.push({
+      name: nameInput.value,
+      email: email.value,
+      password: password.value,
+    });
+
+    await setItem('user', JSON.stringify(user));
+    resetForm();
+    loadUser();
+    back();
+  }
+
+  /**
+ * Setzt das Formular zurück.
+ */
+  function resetForm() {
+    nameInput.value = '';
+    email.value = '';
+    password.value = '';
+    registerBtn.disabled = false;
+  }
+
+/**
+ * Überprüft, ob ein Benutzer bereits registriert ist.
+ */
+  function isUserAlreadyRegistered(name, email) {
+    for (let i = 0; i &lt; user.length; i++) {
+      if (user[i].name === name || user[i].email === email) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  registerBtn.addEventListener('click', register);
+});
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#LogInCheck">LogInCheck</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addNewContact">addNewContact</a></li><li><a href="global.html#addNewTask">addNewTask</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#assigned">assigned</a></li><li><a href="global.html#back">back</a></li><li><a href="global.html#backChange">backChange</a></li><li><a href="global.html#changeSubtaskStatus">changeSubtaskStatus</a></li><li><a href="global.html#checkLogin">checkLogin</a></li><li><a href="global.html#checkMobileLogin">checkMobileLogin</a></li><li><a href="global.html#checkPW">checkPW</a></li><li><a href="global.html#closeAddNewTask">closeAddNewTask</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#closeTask">closeTask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#currentDraggedElement">currentDraggedElement</a></li><li><a href="global.html#currentEditingIndex">currentEditingIndex</a></li><li><a href="global.html#deleteEditedContact">deleteEditedContact</a></li><li><a href="global.html#deleteMobile">deleteMobile</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editMobile">editMobile</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#emailCheck">emailCheck</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#forgotPW">forgotPW</a></li><li><a href="global.html#generateUniqueId">generateUniqueId</a></li><li><a href="global.html#getBoardFromRemoteStorage">getBoardFromRemoteStorage</a></li><li><a href="global.html#getContactsFromRemoteStorage">getContactsFromRemoteStorage</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#getNextUrgentDate">getNextUrgentDate</a></li><li><a href="global.html#getTasksFromLocalStorage">getTasksFromLocalStorage</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#handleContactCheckboxChange">handleContactCheckboxChange</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#isValidEmail">isValidEmail</a></li><li><a href="global.html#loadArray">loadArray</a></li><li><a href="global.html#loadBoard">loadBoard</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadSignUp">loadSignUp</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#loadUser">loadUser</a></li><li><a href="global.html#loginscreen">loginscreen</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openContactDetails">openContactDetails</a></li><li><a href="global.html#openMenu">openMenu</a></li><li><a href="global.html#openMobileVersion">openMobileVersion</a></li><li><a href="global.html#openPage">openPage</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#priorityLow">priorityLow</a></li><li><a href="global.html#priorityLowAddTask">priorityLowAddTask</a></li><li><a href="global.html#priorityMedium">priorityMedium</a></li><li><a href="global.html#priorityMediumAddTask">priorityMediumAddTask</a></li><li><a href="global.html#priorityUrgent">priorityUrgent</a></li><li><a href="global.html#priorityUrgentAddTask">priorityUrgentAddTask</a></li><li><a href="global.html#remoteStorageKeyTest">remoteStorageKeyTest</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#renderContactForm">renderContactForm</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#resetCheckboxes">resetCheckboxes</a></li><li><a href="global.html#resetPW">resetPW</a></li><li><a href="global.html#resetPriority">resetPriority</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#saveEditedContact">saveEditedContact</a></li><li><a href="global.html#setBoardToRemoteStorage">setBoardToRemoteStorage</a></li><li><a href="global.html#setContactIconBackground">setContactIconBackground</a></li><li><a href="global.html#setContactsToRemoteStorage">setContactsToRemoteStorage</a></li><li><a href="global.html#setFieldsToStandard">setFieldsToStandard</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setItemValues">setItemValues</a></li><li><a href="global.html#setMinDateAttribute">setMinDateAttribute</a></li><li><a href="global.html#setSubtasks">setSubtasks</a></li><li><a href="global.html#showAwaitingFeedbackBoard">showAwaitingFeedbackBoard</a></li><li><a href="global.html#showContacts">showContacts</a></li><li><a href="global.html#showDoneBoard">showDoneBoard</a></li><li><a href="global.html#showFilteredTasks">showFilteredTasks</a></li><li><a href="global.html#showInProgressBoard">showInProgressBoard</a></li><li><a href="global.html#showToDoBoard">showToDoBoard</a></li><li><a href="global.html#sortContact">sortContact</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#taskAddedReport">taskAddedReport</a></li><li><a href="global.html#tasks">tasks</a></li><li><a href="global.html#updateAssignedArray">updateAssignedArray</a></li><li><a href="global.html#updateAssignedContacts">updateAssignedContacts</a></li><li><a href="global.html#updateHTML">updateHTML</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userCheck">userCheck</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jun 02 2023 22:29:55 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
