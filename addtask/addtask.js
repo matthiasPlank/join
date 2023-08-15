@@ -1,12 +1,11 @@
 /**
- * Array für zugewiesene Kontakte
- * @type {Object[]}
+ * Array for assigned contacts
+ * @type {Object[]} - new array for assigned contacts
  */
-let assigned = []; // Neues Array für zugewiesene Kontakte
-
+let assigned = []; 
 
 /**
- * Lädt alle Aufgaben und Kontakte aus dem Remote Storage
+ * Loads tasks and contacts from the remote storage
  * @returns {Promise<void>}
  */
 async function loadArray() {
@@ -17,17 +16,66 @@ async function loadArray() {
   priorityMediumAddTask();
 }
 
-
 /**
- * Erstellt eine neue Aufgabe
- * 
+ * Creates a new Task
  */
 async function createTask() {
+
+  let inputValues = getValuesForCreateTask(); 
+
+  let subtasks = [];
+  setSubtasks(subtasks);
+  let subtaskStatus = [];
+  subtasks.forEach(() => {
+    subtaskStatus.push(false); // Push false in das subtaskStatus-Array
+  });
+
+  let newTask = createNewTask(inputValues, assigned , subtasks, subtaskStatus); 
+  tasks.push(newTask);
+
+  setFieldsToStandard();
+  resetPriority();
+  setBoardToRemoteStorage();
+  taskAddedReport();
+}
+
+/**
+ * Creates an new Task Object with hand over parameters.
+ * @param {String[]} inputValues 
+ * @param {Object[]} assigned 
+ * @param {String[]} subtasks 
+ * @param {Boolean[]} subtaskStatus 
+ * @returns 
+ */
+function createNewTask(inputValues, assigned , subtasks, subtaskStatus){
+    /**
+   * @type {Object}
+   */
+    let newTask = {
+      id: generateUniqueId(),
+      title: inputValues[0],
+      description:  inputValues[1],
+      category:  inputValues[2],
+      dueDate:  inputValues[3],
+      assigned: assigned,
+      kanban: 'to-do',
+      priority:  inputValues[4],
+      subtasks: subtasks,
+      subtaskStatus: subtaskStatus // Array mit false-Werten für Subtask-Status
+    };
+    return newTask; 
+}
+
+/**
+ * Gets the values from the HTML Form to create a new Task an returns these parameters. 
+ * @returns String[]
+ */
+function getValuesForCreateTask(){
+
   let title = document.getElementById('titleInputAddTask').value;
   let description = document.getElementById('descriptionInputAddTask').value;
   let category = document.getElementById('categoryInputAddTask').value;
   let dueDate = document.getElementById('dueDateInputAddTask').value;
-
  
   let priority = 'medium'; // Standardpriorität (falls nichts ausgewählt). 
   if (document.getElementById('buttonUrgentAddTask').classList.contains('urgent-background')) {
@@ -37,45 +85,13 @@ async function createTask() {
   } else if (document.getElementById('buttonLowAddTask').classList.contains('low-background')) {
     priority = 'low';
   }
-
- 
-  let subtasks = [];
-  setSubtasks(subtasks);
-
-  let subtaskStatus = [];
-  subtasks.forEach(() => {
-    subtaskStatus.push(false); // Push false in das subtaskStatus-Array
-  });
-
-
-  /**
-   * @type {Object}
-   */
-  let newTask = {
-    id: generateUniqueId(),
-    title: title,
-    description: description,
-    category: category,
-    dueDate: dueDate,
-    assigned: assigned,
-    kanban: 'to-do',
-    priority: priority,
-    subtasks: subtasks,
-    subtaskStatus: subtaskStatus // Array mit false-Werten für Subtask-Status
-  };
-
-  tasks.push(newTask);
-
-  setFieldsToStandard();
-  resetPriority();
-  setBoardToRemoteStorage();
-  taskAddedReport();
+  return [title, description, category, dueDate, priority]; 
 }
 
 
 /**
- * Alle hinzugefügten Subtasks werden in das Array der Aufgabe gepusht
- * @param {string[]} subtasks - Das Array der Subtasks
+ * Get all subtasks from the HTML form an save it in an array für the task.
+ * @param {String[]} subtasks - array for subtasks
  */
 function setSubtasks(subtasks) {
   
@@ -88,7 +104,7 @@ function setSubtasks(subtasks) {
 
 
 /**
- * Setzt alle ausgefüllten Felder wieder zurück, nachdem eine Aufgabe erstellt wurde.
+ * Resets the inpute fields after a new task was created. 
  */
 function setFieldsToStandard() {
   document.getElementById('titleInputAddTask').value = '';
@@ -100,7 +116,7 @@ function setFieldsToStandard() {
 
 
 /**
- * Setzt die Buttons für die Priorität wieder zurück, nachdem eine Aufgabe erstellt wurde.
+ * Resets the priority button after creating a new task. 
  */
 function resetPriority() {
   document.getElementById('buttonUrgentAddTask').classList.remove('urgent-background');
@@ -110,7 +126,7 @@ function resetPriority() {
 
 
 /**
- * Gibt eine Rückmeldung, dass eine Aufgabe erstellt wurde.
+ * Shows a message after creating a new task. 
  */
 function taskAddedReport() {
   document.getElementById('successMessage').classList.remove('d-none');
@@ -121,20 +137,15 @@ function taskAddedReport() {
 
 
 /**
- * Die Möglichkeit, eine Subtask hinzuzufügen.
+ * Add a new subtask
  */
 function addSubtask() {
-  /**
-   * @type {string}
-   */
+
   let subtask = document.getElementById('subtaskInput').value;
 
   if (subtask === '') {
     alert('Please enter a subtask.');
   } else {
-    /**
-     * @type {HTMLElement}
-     */
     let container = document.getElementById('subtaskContainer');
     container.innerHTML += `<label class="subtask"> <input type="checkbox"> ${subtask} </label>`;
     document.getElementById('subtaskInput').value = '';
@@ -143,7 +154,7 @@ function addSubtask() {
 
 
 /**
- * Lädt alle Kontakte aus der Kontaktliste.
+ * Loads all contacts from the contactlist.
  */
 function loadContacts() {
   let contactsField = document.getElementById('assignedCheckboxContainer');
@@ -155,47 +166,38 @@ function loadContacts() {
   }
 }
 
-  function doNotClose(event){
+/**
+ * Stops events for superior elements.
+ * @param {event} event 
+ */
+function doNotClose(event){
     event.stopPropagation();
-  }
+}
 
 /**
- * Zeigt alle Kontakte aus der Kontaktliste an.
+ * Shows all contacts from the contactslist.
  */
 function showContacts() {
-  console.log("showContacts function");
+
   let labels = document.getElementsByClassName('label');
   let container = document.getElementById('selectContacts');
 
-  if (container.classList.contains('bordernone')) {
-    container.classList.remove('bordernone')
-  } else {
-    container.classList.add('bordernone');
-  }
+  if (container.classList.contains('bordernone') ? container.classList.remove('bordernone') : container.classList.add('bordernone') ) ; 
 
   for (let i = 0; i < labels.length; i++) {
-    if (labels[i].classList.contains('d-none')) {
-      labels[i].classList.remove('d-none');
-    } else {
-      labels[i].classList.add('d-none');
-    }
+    if (labels[i].classList.contains('d-none') ? labels[i].classList.remove('d-none') : labels[i].classList.add('d-none')); 
   }
 
   let contacts = document.getElementById('assignedCheckboxContainer');
-
-  if (contacts.classList.contains('border-bottom')) {
-    contacts.classList.remove('border-bottom')
-  } else {
-    contacts.classList.add('border-bottom');
-  }
+  if (contacts.classList.contains('border-bottom') ? contacts.classList.remove('border-bottom') : contacts.classList.add('border-bottom') ) ;
 
 }
 
 
 /**
- * Ermöglicht mit der Checkbox das Zuweisen und Entfernen eines Kontaktes.
- * @param {HTMLInputElement} checkbox - Die Checkbox
- * @param {number} index - Der Index des Kontakts
+ * Add and removes the selected contacts for a task
+ * @param {HTMLInputElement} checkbox - checkbox element
+ * @param {number} index -  index of contact
  */
 function handleContactCheckboxChange(checkbox, index) {
   let selectedContact = contacts[index];
@@ -210,8 +212,8 @@ function handleContactCheckboxChange(checkbox, index) {
 
 
 /**
- * Aktualisiert das Array mit den jeweiligen Kontakten.
- * @param {Object} contact - Der Kontakt
+ * Updates the array of contacts. 
+ * @param {Object} contact 
  */
 function updateAssignedArray(contact) {
   let contactIndex = assigned.findIndex((assignedContact) => assignedContact === contact);
@@ -222,7 +224,7 @@ function updateAssignedArray(contact) {
 
 
 /**
- * Setzt alle Checkboxen wieder zurück, nachdem eine Aufgabe erstellt wurde.
+ * Resets checkboxes after creating a new Task.
  */
 function resetCheckboxes() {
   let checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -233,8 +235,8 @@ function resetCheckboxes() {
 
 
 /**
- * Erstellt eine einzigartige ID.
- * @returns {number} - Die einzigartige ID
+ * Generates a uniqe ID. 
+ * @returns {number} - uniqe ID
  */
 function generateUniqueId() {
   var timestamp = new Date().getTime();
@@ -245,7 +247,7 @@ function generateUniqueId() {
 
 
 /**
- * Setzt die Priorität für die erstellte Aufgabe auf "dringend".
+ * Sets the priority to "urgent" for the creating Task. 
  */
 function priorityUrgentAddTask() {
   document.getElementById('buttonUrgentAddTask').classList.add('urgent-background');
@@ -258,7 +260,7 @@ function priorityUrgentAddTask() {
 
 
 /**
- * Setzt die Priorität für die erstellte Aufgabe auf "mittel".
+ *  Sets the priority to "medium" for the creating Task. 
  */
 function priorityMediumAddTask() {
   document.getElementById('buttonMediumAddTask').classList.add('medium-background');
@@ -271,8 +273,8 @@ function priorityMediumAddTask() {
 
 
 /**
- * Setzt die Priorität für die erstellte Aufgabe auf "niedrig".
- */
+* Sets the priority to "low" for the creating Task. 
+*/
 function priorityLowAddTask() {
   document.getElementById('buttonLowAddTask').classList.add('low-background');
   document.getElementById('low-image').src = "../img/low-symbol.svg";
@@ -284,7 +286,7 @@ function priorityLowAddTask() {
 
 
 /**
- * Setzt ein Mindestdatum.
+ * Sets a minumum date.
  */
 function setMinDateAttribute() {
   var today = new Date();
@@ -292,26 +294,24 @@ function setMinDateAttribute() {
   var mm = today.getMonth() + 1; //January is 0!
   var yyyy = today.getFullYear();
   var nextyyyy = yyyy + 1; 
-  if (dd < 10) {
-    dd = '0' + dd;
-  }
 
-  if (mm < 10) {                                                                          
-    mm = '0' + mm;
-  }
+  if (dd < 10 ?  dd = '0' + dd : "" ); 
+  if (mm < 10 ?  mm = '0' + mm : "" );                                                                           
+   
   today = yyyy + '-' + mm + '-' + dd;
   const nextYear = nextyyyy + '-' + mm + '-' + dd;
   document.getElementById("dueDateInputAddTask").setAttribute("min", today);
   document.getElementById("dueDateInputAddTask").setAttribute("max", nextYear);
 }
 
-// Event-Listener für Klick-Ereignisse im gesamten Dokument
+/**
+ * Eventlistener für click event on document
+ */
 document.addEventListener('click', function(event) {
   let contactMenu = document.getElementById('selectContacts');
-  let targetElement = event.target; // geklicktes Element
+  let targetElement = event.target; // clicked element
 
-
-  // Überprüfen, ob das geklickte Element Teil des Dropdown-Menüs ist oder ob das Menü geöffnet ist
+  // Checks if clicked element is part of droptdown menu or menu is opened. 
   if (!contactMenu.contains(targetElement)) {
 
     contactMenu.classList.remove('bordernone');
@@ -325,25 +325,39 @@ document.addEventListener('click', function(event) {
 });
 
 
+/**
+ * Evenetlistener for check "enter" key to add a new subtask
+ */
 document.addEventListener('keydown', function(event) {
-  if (event.keyCode === 13) { // Überprüfen, ob die Enter-Taste gedrückt wurde
-    if (document.activeElement.id == 'subtaskInput') { // Überprüfen, ob das aktive Element das Subtask-Eingabefeld ist
+  if (event.keyCode === 13) { // ckecks, "enter-key" is pressed.
+    if (document.activeElement.id == 'subtaskInput') {
       addSubtask(); 
       event.preventDefault(); 
     }
   }
 });
 
+/**
+ * Reloads page
+ */
 function clearAddTaskForm(){
   window.location.reload();
 }
 
+/**
+ * Sets dueDate to today
+ */
 function setTodayDate() {
   var today = new Date();
   var dueDateInput = document.getElementById('dueDateInputAddTask');
   dueDateInput.value = formatDate(today);
 }
 
+/**
+ * Formats the handed over date. 
+ * @param {date} date 
+ * @returns String - Formated date
+ */
 function formatDate(date) {
   var year = date.getFullYear();
   var month = ('0' + (date.getMonth() + 1)).slice(-2);
