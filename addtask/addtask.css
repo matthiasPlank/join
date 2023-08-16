@@ -13,7 +13,6 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
-
 .content {
     margin-left: 250px;
     margin-top: 100px;
@@ -68,7 +67,6 @@ body::-webkit-scrollbar-thumb {
 form {
     display: flex !important;
 }
-
 
 .task-description input {
     padding: 12px 18px;
@@ -259,6 +257,18 @@ form {
     font-size: 16px;
 }
 
+.subtask{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.subtask input{
+   min-width: auto;
+}
+.subtask p{
+   margin: 0px;
+ }
 
 
 .addSubtask-input-button{

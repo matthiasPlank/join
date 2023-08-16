@@ -147,7 +147,7 @@ function addSubtask() {
     alert('Please enter a subtask.');
   } else {
     let container = document.getElementById('subtaskContainer');
-    container.innerHTML += `<label class="subtask"> <input type="checkbox"> ${subtask} </label>`;
+    container.innerHTML += `<label class="subtask"> <input type="checkbox"> <p>${subtask}</p> </label>`;
     document.getElementById('subtaskInput').value = '';
   }
 }

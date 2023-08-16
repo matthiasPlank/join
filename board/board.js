@@ -234,22 +234,9 @@ function updateAssignedContacts() {
  * Speichert die Aufgabe, nachdem sie bearbeitet wurde.
  */
 function saveChanges() {
-  /**
-   * Der Titel der Aufgabe.
-   * @type {string}
-   */
+ 
   const title = document.getElementById('titleInput').value;
-
-  /**
-   * Die Beschreibung der Aufgabe.
-   * @type {string}
-   */
   const description = document.getElementById('descriptionInput').value;
-
-  /**
-   * Das Fälligkeitsdatum der Aufgabe.
-   * @type {string}
-   */
   const dueDate = document.getElementById('dateInput').value;
 
   // Überprüfe, ob der Index gültig ist
@@ -415,6 +402,6 @@ function savedChangesReport() {
   document.getElementById('savedChanges').classList.remove('d-none');
   setTimeout(() => {
     document.getElementById('savedChanges').classList.add('d-none');
-  }, 2000); // Entfernt Meldung wieder nach 2 Sekunden.
+  }, 2500); // Entfernt Meldung wieder nach 2 Sekunden.
 }
 
