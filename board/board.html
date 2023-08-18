@@ -18,9 +18,6 @@
     
     <title>Board</title>
     <link rel="icon" type="image/x-icon" href="../img/join-logo.png">
-
-
-
 </head>
 
 <body onload="includeHTML(); loadBoard()" id="board">
@@ -34,52 +31,34 @@
             <div w3-include-html="../addtask/addtask-template.html"></div>
         </div>  
     </div>
-
     <div id="content">
-
         <div class="board-header" id="board-header">
             <div>
-            <h1>Board</h1>
+                <h1>Board</h1>
             </div>
-
-
             <div class="interact">
                 <div class="find-task">
                     <input oninput="filterTasks()" id="searchInputField" placeholder="Find Task">
                     <img src="../img/search.png">
                 </div>
-
                 <button onclick="addNewTask()" class="add-task-button"> <span>Add task</span> <img src="../img/addtask.png">  </button>
             </div>
         </div>
-
-        
-
         <div class="kanbanboard" id="kanban-board">
-
             <div class="kanban">
-                <div class="kanban-header">
-                    
+                <div class="kanban-header">             
                     TO DO <img onclick="addNewTask()" src="../img/kanban-plus.png">
                 </div>
-
                 <div id="to-do" ondrop="moveTo('to-do'); removeHighlight('to-do')" ondragleave="removeHighlight('to-do')" ondragover="allowDrop(event); highlight('to-do')">
                 </div>
             </div>
-
-
-
             <div class="kanban">
                 <div class="kanban-header">
                     IN PROGRESS <img onclick="addNewTask()" src="../img/kanban-plus.png">
                 </div>
-
                 <div id="in-progress" ondrop="moveTo('in-progress'); removeHighlight('in-progress')" ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')">
                 </div>
             </div>
-
-
-
             <div class="kanban">
                 <div class="kanban-header">
                     AWAITING FEEDBACK <img onclick="addNewTask()" src="../img/kanban-plus.png">
@@ -88,23 +67,17 @@
                 <div id="awaiting-feedback" ondrop="moveTo('awaiting-feedback'); removeHighlight('awaiting-feedback')" ondragleave="removeHighlight('awaiting-feedback')" ondragover="allowDrop(event); highlight('awaiting-feedback')">
                 </div>
             </div>
-
-
-
             <div class="kanban">
                 <div class="kanban-header">
                     DONE <img onclick="addNewTask()" src="../img/kanban-plus.png">
                 </div>
-
                 <div id="done" ondrop="moveTo('done'); removeHighlight('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')">
                 </div>
             </div>
         </div>
     </div>
-
     <div id="edit-task" class="d-none">
     </div>
-
     <div id="savedChanges" class="d-none slide-in-bottom">
         Your changes have been saved! <img src="../img/savedChanges.png">
     </div>

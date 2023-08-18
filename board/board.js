@@ -1,34 +1,29 @@
 /**
- * Das Array mit den Aufgaben.
+ * Array of tasks
  * @type {Array}
  */
 let tasks = [];
 
-
 /**
- * Der Schlüssel zum Speichern im Remote Storage.
+ * Key to save in remote storage
  * @type {string}
  */
 const remoteStorageKeyTest = 'board';
 
-
 /**
- * Der aktuelle Index der Aufgabe für die Bearbeitung.
+ * Index of the current editing task.
  * @type {number}
  */
 let currentEditingIndex = -1;
 
-
 /**
- * Das aktuelle gezogene Element.
+ * current dragged element. 
  * @type {object}
  */
 let currentDraggedElement;
 
-
 /**
- * Lädt alle Aufgaben und Kontakte aus dem Remote Storage und zeigt sie im HTML an.
- * 
+ * Loads the tasks and contact from the remote storage an renders it. 
  */
 async function loadBoard() {
   tasks = await getBoardFromRemoteStorage();
@@ -36,10 +31,8 @@ async function loadBoard() {
   updateHTML();
 }
 
-
 /**
- * Speichert die Aufgaben im Remote Storage.
- * 
+ * Saves the task from the board to the remote storage. 
  */
 async function setBoardToRemoteStorage() {
   try {
