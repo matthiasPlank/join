@@ -17,7 +17,7 @@ const remoteStorageKeyTest = 'board';
 let currentEditingIndex = -1;
 
 /**
- * current dragged element. 
+ * Current dragged element. 
  * @type {object}
  */
 let currentDraggedElement;
@@ -36,31 +36,27 @@ async function loadBoard() {
  */
 async function setBoardToRemoteStorage() {
   try {
-    const response = await setItem(remoteStorageKeyTest, JSON.stringify(tasks));
-    console.log(response);
+    await setItem(remoteStorageKeyTest, JSON.stringify(tasks));
   } catch (error) {
-    console.log(error);
+    console.warn(error);
   }
 }
 
-
 /**
- * Lädt die Aufgaben aus dem Remote Storage.
- *
+ * Loads the tasks from the remote storage
  */
 async function getBoardFromRemoteStorage() {
   try {
     const response = await getItem(remoteStorageKeyTest);
     return JSON.parse(response);
   } catch (error) {
-    console.log(error);
+    console.warn(error);
     return [];
   }
 }
 
-
 /**
- * Aktualisiert das HTML der verschiedenen Boards mit den Aufgaben.
+ * Refreshs the board
  */
 function updateHTML() {
   showToDoBoard();
@@ -69,19 +65,18 @@ function updateHTML() {
   showDoneBoard();
 }
 
-
-/**
- * Filtert die Aufgaben, wenn etwas in das Suchfeld eingegeben wird.
+/**‚
+ * Filters the tasks if something is entered in search field. 
  */
 function filterTasks() {
   /**
-   * Der Suchbegriff.
+   * The search string.
    * @type {string}
    */
   let search = document.getElementById('searchInputField').value.toLowerCase();
 
   /**
-   * Die gefilterten Aufgaben.
+   * the filtered tasks.
    * @type {Array}
    */
   let filteredTasks = tasks.filter(task => {
@@ -94,8 +89,8 @@ function filterTasks() {
 
 
 /**
- * Zeigt die gefilterten Aufgaben im jeweiligen Board an.
- * @param {Array} filteredTasks - Die gefilterten Aufgaben.
+ * Shows the filtered tasks on the board. 
+ * @param {Array} filteredTasks - filtered tasks. 
  */
 function showFilteredTasks(filteredTasks) {
   document.getElementById('to-do').innerHTML = '';
@@ -110,10 +105,9 @@ function showFilteredTasks(filteredTasks) {
   });
 }
 
-
 /**
- * Öffnet die ausgewählte Aufgabe und zeigt diese in HTML an.
- * @param {string} elementId - Die ID des Elements.
+ * Opens the selected task
+ * @param {string} elementId - ID of the element.
  */
 function openTask(elementId) {
   let currentTask = document.getElementById('edit-task');
@@ -121,10 +115,9 @@ function openTask(elementId) {
 
   let date = new Date("July 21");
 
-  // Suchen Sie den entsprechenden Task anhand der ID
+  // Search Task by ID
   const element = tasks.find(task => task.id === elementId);
 
-  // Erstellen Sie den HTML-Code für die Karte mit den Werten des ausgewählten Tasks
   currentTask.innerHTML = ``;
   currentTask.innerHTML = openTaskHTML(element, date);
 
@@ -132,22 +125,21 @@ function openTask(elementId) {
   kanban.classList.add('blur');
 }
 
-
 /**
- * Ändert den Status einer Teilaufgabe.
- * @param {string} elementId - Die ID des Elements.
- * @param {string} subtask - Die Teilaufgabe.
- * @param {boolean} isChecked - Der ausgewählte Status.
+ * Changes the status of a substask.
+ * @param {string} elementId -  ID of the task.
+ * @param {string} subtask - subtask.
+ * @param {boolean} isChecked - selected status.
  */
 function changeSubtaskStatus(elementId, subtask, isChecked) {
-  let findtask = tasks.find(task => task.id === elementId); // Suche nach dem Task mit der entsprechenden ID
-  let findsubtask = findtask.subtasks.find(task => task === subtask); // Suche nach der Subtask im subtasks-Array des gefundenen Tasks
-  let position = findtask.subtasks.indexOf(findsubtask); // Position der Subtask im subtasks-Array des gefundenen Tasks
+  let findtask = tasks.find(task => task.id === elementId); // Search task by ID
+  let findsubtask = findtask.subtasks.find(task => task === subtask); // seach subtask in finded task.
+  let position = findtask.subtasks.indexOf(findsubtask); // get position of subtask
 
   if (isChecked) {
-    findtask.subtaskStatus[position] = true; // Setze den Status der Subtask auf true
+    findtask.subtaskStatus[position] = true; 
   } else {
-    findtask.subtaskStatus[position] = false; // Setze den Status der Subtask auf false
+    findtask.subtaskStatus[position] = false;
   }
 
   setBoardToRemoteStorage();
@@ -156,7 +148,7 @@ function changeSubtaskStatus(elementId, subtask, isChecked) {
 
 
 /**
- * Schließt die geöffnete Aufgabe.
+ * Closes a openend Task. 
  */
 function closeTask() {
   let currentTask = document.getElementById('edit-task');
@@ -167,8 +159,8 @@ function closeTask() {
 
 
 /**
- * Löscht die ausgewählte Aufgabe.
- * @param {string} id - Die ID der Aufgabe.
+ * Deletes the current Task
+ * @param {string} id -  ID of the Task.
  */
 function deleteTask(id) {
   const index = tasks.findIndex(task => task.id === id);
@@ -180,21 +172,17 @@ function deleteTask(id) {
   }
 }
 
-
 /**
- * Die Möglichkeit, eine Aufgabe zu bearbeiten.
- * @param {string} id - Die ID der Aufgabe.
+ * Edit Task
+ * @param {string} id - ID of Task that should be edited.
  */
 function editTask(id) {
   let currentTask = document.getElementById('edit-task');
   currentTask.innerHTML = '';
 
-  // Suchen Sie den entsprechenden Task anhand der ID
   const element = tasks.find(task => task.id === id);
 
   currentTask.innerHTML = editTaskHTML(element);
-
-  // Setze den aktuellen Index für die Bearbeitung
   currentEditingIndex = tasks.findIndex(task => task.id === id);
 }
 
