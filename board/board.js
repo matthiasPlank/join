@@ -188,31 +188,24 @@ function editTask(id) {
 
 
 /**
- * Das Zuweisen der Kontakte für die jeweilige Aufgabe.
+ * Assigning the contacts for a task.
  */
 function updateAssignedContacts() {
-  // Erstelle ein leeres Array, um zugewiesene Kontakte zu speichern
-  const assignedContacts = [];
 
-  // Wähle alle ausgewählten Checkbox-Elemente aus
+  const assignedContacts = [];
   const assignedCheckboxElements = document.querySelectorAll('input[type="checkbox"]:checked');
 
-  // Iteriere über jedes ausgewählte Checkbox-Element
   assignedCheckboxElements.forEach((checkbox) => {
-    // Extrahiere den Index des Kontakts aus der ID der Checkbox
     const contactIndex = parseInt(checkbox.id.split('-')[1]);
-
-    // Füge den entsprechenden Kontakt zum zugewiesenen Kontakte-Array hinzu
     assignedContacts.push(contacts[contactIndex]);
   });
 
-  // Aktualisiere die 'assigned'-Eigenschaft des aktuellen bearbeiteten Tasks mit den zugewiesenen Kontakten
   tasks[currentEditingIndex].assigned = assignedContacts;
 }
 
 
 /**
- * Speichert die Aufgabe, nachdem sie bearbeitet wurde.
+ * Save the task after it has been edited.
  */
 function saveChanges() {
  
@@ -220,7 +213,7 @@ function saveChanges() {
   const description = document.getElementById('descriptionInput').value;
   const dueDate = document.getElementById('dateInput').value;
 
-  // Überprüfe, ob der Index gültig ist
+  //Check if the index is valid
   if (currentEditingIndex >= 0 && currentEditingIndex < tasks.length) {
     tasks[currentEditingIndex].title = title;
     tasks[currentEditingIndex].description = description;
@@ -236,7 +229,7 @@ function saveChanges() {
 
 
 /**
- * Setzt die Priorität auf "dringend".
+ * Sets the priority on "urgent".
  */
 function priorityUrgent() {
   document.getElementById('buttonUrgent').classList.add('urgent-background');
@@ -250,7 +243,7 @@ function priorityUrgent() {
 
 
 /**
- * Setzt die Priorität auf "mittel".
+ * Sets the priority on "medium".
  */
 function priorityMedium() {
   document.getElementById('buttonMedium').classList.add('medium-background');
@@ -264,7 +257,7 @@ function priorityMedium() {
 
 
 /**
- * Setzt die Priorität auf "niedrig".
+ * Sets the priority to "low".
  */
 function priorityLow() {
   document.getElementById('buttonLow').classList.add('low-background');
@@ -279,27 +272,24 @@ function priorityLow() {
 
 
 /**
- * Lässt die Aufgabe für den Drag-and-Drop-Vorgang vorbereitet werden.
- *
- * @param {string} id - Die ID der Aufgabe, die gezogen werden soll.
+ * The task for the drag-and-drop process is prepared.
+ * @param {string} id - The ID of the task that is to be drawn.
  */
 function startDragging(id) {
   currentDraggedElement = tasks.find(task => task.id === id);
 }
 
 /**
- * Erlaubt den Drag-and-Drop-Vorgang.
- *
- * @param {Event} ev - Das Drag-and-Drop-Ereignisobjekt.
+ * Allows the drag-and-drop process.
+ * @param {Event} ev - The drag-and-drop event object.
  */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
 /**
- * Bewegt die gezogene Aufgabe in ein bestimmtes Kanban-Board.
- *
- * @param {string} kanban - Der Name des Kanban-Boards, in das die Aufgabe verschoben wird.
+ * Moves the drawn task into a certain Kanban board.
+ * @param {string} kanban - The name of the Kanban board, into which the task is postponed.
  */
 function moveTo(kanban) {
   currentDraggedElement['kanban'] = kanban;
@@ -308,18 +298,16 @@ function moveTo(kanban) {
 }
 
 /**
- * Hervorhebungsbereich für den Drag-and-Drop-Vorgang.
- *
- * @param {string} id - Die ID des Bereichs, der hervorgehoben werden soll.
- */
+ * Figure area for the drag-and-drop process.
+ * @param {string} id - The ID of the area that is to be emphasized. 
+*/
 function highlight(id) {
   document.getElementById(id).classList.add('drag-area-highlight');
 }
 
 /**
- * Entfernt die Hervorhebung des Bereichs nach dem Drag-and-Drop-Vorgang.
- *
- * @param {string} id - Die ID des Bereichs, dessen Hervorhebung entfernt werden soll.
+  * Removes the highlighting of the area according to the drag-and-drop process. 
+  * @param {string} id - The ID of the area, the highlighting of which is to be removed.
  */
 function removeHighlight(id) {
   document.getElementById(id).classList.remove('drag-area-highlight');
