@@ -1,6 +1,6 @@
 /**
- * Funktion zum einbinden der Templates.
- * @returns Git das den inklidierten HTML Code zurück
+ * Function to integrate the templates.
+ * @returns That returns the included HTML code
  */
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
@@ -29,8 +29,9 @@ function includeHTML() {
       }
     }
   }
+
   /**
-   * Funktion zum Ausloggen aus dem JOIN System. ‚
+   * Function for logging out of the JOIN system.
    */
   function logOut() {
     localStorage.removeItem('username');
@@ -45,7 +46,7 @@ function includeHTML() {
   }
 
 /**
- * Öffnet das mobile Menü
+ * Opens the mobile menu
  */
 function openMenu(){
   let mobileMenu = document.getElementById('mobileMenuPopup');
@@ -56,6 +57,9 @@ function openMenu(){
   }
 }
 
+/**
+ * Sets the active class to all links of the active page
+ */
 window.addEventListener("DOMContentLoaded", function() {
   var activePage = localStorage.getItem("activePage");
   if (activePage) {
@@ -66,20 +70,25 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 });
 
+/**
+ * Changes the active Page
+ * @param {Event} event - Event 
+ * @param {String} pageName - page 
+ */
 function changeActivePage(event, pageName) {
-  event.preventDefault(); // Verhindert das Laden der neuen Seite
 
+  event.preventDefault(); // Prevents the reloading page. 
   var clickedElement = event.target;
-  
-  // Entferne die Klasse "active" von allen Links
+
+  // Remove the "active" class from all links
   var links = document.getElementsByTagName("a");
   for (var i = 0; i < links.length; i++) {
       links[i].classList.remove("active");
   }
 
-  // Füge die Klasse "active" zum geklickten Link hinzu
+  // Add the "active" class to the clicked link
   clickedElement.classList.add("active");
 
-  // Speichere den Zustand der aktiven Seite im Web Storage
+  // Save the state of the active page to web storage
   localStorage.setItem("activePage", pageName);
 }

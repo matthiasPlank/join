@@ -1,21 +1,15 @@
-
 body {
     margin: 0;
     background: #F6F7F8;
 }
-
-
-
 :root {
     font-family: 'Inter', sans-serif;
 }
-
 @supports (font-variation-settings: normal) {
     :root {
         font-family: 'Inter var', sans-serif;
     }
 }
-
 .logo-page {
     position: absolute;
     width: 100vw;
@@ -24,7 +18,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .logo-sign-up {
     position: absolute;
     width: 100vw;
@@ -33,7 +26,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .logo-page img {
     animation-name: move-and-scale;
     animation-duration: 1s;
@@ -42,7 +34,6 @@ body {
     z-index: 5;
 
 }
-
 .login-page {
     display: flex;
     flex-direction: column;
@@ -56,7 +47,6 @@ body {
     box-shadow: rgba(0, 0, 0, 0.04) 0px 0px 14px 3px;
     border-radius: 2rem;
 }
-
 .forgot-pw-page {
     position: absolute;
     width: 100vw;
@@ -65,8 +55,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
 .logo-page-background {
     background-color: #F6F7F8;
     animation-name: fade-background;
@@ -79,7 +67,6 @@ body {
     z-index: 4;
     transition: z-index 1s ease-in-out;
 }
-
 .info-background {
     position: absolute;
     animation-name: fade-background1;
@@ -91,7 +78,6 @@ body {
     z-index: 5;
     transition: z-index 1s ease-in-out;
 }
-
 .info-image {
     position: absolute;
     bottom: 0;
@@ -101,24 +87,20 @@ body {
     z-index: 9999;
     /* Hoher z-index-Wert */
 }
-
 @keyframes slideAndDisappear {
     0% {
         transform: translateX(-50%) translateY(100%);
         opacity: 1;
     }
-
     50% {
         transform: translateX(-50%) translateY(-600%);
         opacity: 1;
     }
-
     100% {
         transform: translateX(-50%) translateY(-600%);
         opacity: 0;
     }
 }
-
 @keyframes fade-background1 {
     from {
         background-color: rgba(0, 0, 0, 0.8);
@@ -130,31 +112,21 @@ body {
         z-index: 0;
     }
 }
-
-
-
-
-
 .logo-page-background:hover {
     z-index: 0;
 }
-
 .login-font{
     font-size: 3.8rem;
 }
-
 .forgotmypwFont{
     font-size: 3.8rem;
 }
-
 .resetPwFont{
     font-size: 3.0rem;
 }
-
 .signInFont{
     font-size: 3.8rem;
 }
-
 .title-container span {
     font-family: 'Inter';
     font-style: normal;
@@ -168,8 +140,6 @@ body {
     display: flex;
     align-items: center;
 }
-
-
 .title-container {
     border-bottom: 3px solid #29ABE2;
     width: 165px;
@@ -178,9 +148,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
-
 @keyframes move-and-scale {
     from {
         transform: translate(0, 0) scale(1);
@@ -190,38 +157,32 @@ body {
         transform: translate(-42vw, -39vh) scale(0.4);
     }
 }
-
 @keyframes fade-background {
     from {
         background-color: #F6F7F8;
         z-index: 4;
     }
-
     to {
         background-color: transparent;
         z-index: 0;
     }
 }
-
 .login-input {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 
 }
-
 ::placeholder {
     color: #D1D1D1;
     padding-left: 0.5rem;
 }
-
 .login-input input {
     width: 400px;
     height: 40px;
     border-radius: 0.5rem;
     border: 1px solid #D1D1D1;
 }
-
 .input-mail {
     background-image: url('/img/mail-icon.png');
     background-position: right center;
@@ -230,7 +191,6 @@ body {
     background-origin: content-box;
     padding-left: 0.5rem;
 }
-
 .input-name {
     background-image: url('/img/profile-icon.png');
     background-position: right center;
@@ -239,7 +199,6 @@ body {
     background-origin: content-box;
     padding-left: 0.5rem;
 }
-
 .keyIMG{
     animation-name: unset !important;
     animation-duration: unset !important;
@@ -250,8 +209,6 @@ body {
     margin-top: 0.8rem;
     cursor: pointer;
 }
-
-
 .input-key {
     background-position: right center;
     background-repeat: no-repeat;
@@ -259,26 +216,21 @@ body {
     background-origin: content-box;
     padding-left: 0.5rem;
 }
-
 .flex {
     display: flex;
 }
-
 .flex-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 .gap {
     gap: 4vw;
 }
-
 .gap-small {
     gap: 1rem;
 }
-
 .forgot-span {
     color: #29ABE2;
     font-family: 'Inter';
@@ -288,11 +240,9 @@ body {
     line-height: 120%;
     cursor: pointer;
 }
-
 .forgot-span :hover {
     border-bottom: 1px #29ABE2;
 }
-
 .remember-span {
     font-family: 'Inter';
     font-style: normal;
@@ -300,7 +250,6 @@ body {
     font-size: 1rem;
     line-height: 120%;
 }
-
 .log-btn {
     background: #2A3647;
     border-radius: 0.5rem;
@@ -318,12 +267,10 @@ body {
     border: none;
     cursor: pointer;
 }
-
 .log-btn:hover {
     background-color: rgb(41, 171, 226);
     cursor: pointer;
 }
-
 .guest-log-btn {
     background: #FFFFFF;
     border-radius: 0.5rem;
@@ -340,7 +287,6 @@ body {
     font-size: 1rem;
     cursor: pointer;
 }
-
 .guest-log-btn:hover {
     background-color: rgb(41, 171, 226);
     cursor: pointer;
@@ -348,7 +294,6 @@ body {
     border: unset;
 
 }
-
 .sign-up-container {
     display: flex;
     align-items: center;
@@ -357,7 +302,6 @@ body {
     top: 60px;
     right: 70px;
 }
-
 .left-arrow-img {
     position: absolute;
     top: 2vh;
@@ -365,75 +309,54 @@ body {
     cursor: pointer;
     opacity: 1;
 }
-
 .left-arrow-img:hover{
     opacity: 0.3;
 }
-
 .login-input span {
     text-align: center;
 }
-
 .forgot-pw {
     width: 900px;
     height: 500px;
     justify-content: center;
 }
-
 .reset-pw {
     width: 650px;
     height: 500px;
     justify-content: center;
     font-size: 1rem;
 }
-
-
-
 .forgot-pw-btn {
     width: 203px;
     height: 40px;
 }
-
 .forgot-pw-input {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-
 .forgot-pw-input input {
     width: 400px;
     height: 40px;
     border-radius: 0.5rem;
     border: 1px solid #D1D1D1;
 }
-
-
-
-
 @media only screen and (min-width: 320px) and (max-width: 767px) {
     .login-page {
         width: 86vw;
     }
-
     .forgotmypwFont{
         font-size: 1.8rem;
     }
-
     .resetPwFont{
         font-size: 1.7rem;
     }
-    
     .signInFont{
         font-size: 3rem;
     }
-    
     .keyIMG{
-        right: 2rem;
-
-            
+        right: 2rem;          
     }
-    
-
     .sign-up-container {
         bottom: 3vh;
         left: 50px;
@@ -441,61 +364,46 @@ body {
         right: unset;
         z-index: 999;
     }
-
-
     .log-btn {
         width: 40vw;
     }
-
     .guest-log-btn {
         width: 40vw;
     }
-
     .login-input input {
         width: 70vw;
     }
-
-
     .title-container {
         width: 25vw;
         height: 14vh;
     }
-
     .mobile-btn {
         width: 30vw;
     }
-
     .left-arrow-img {
         position: absolute;
         top: 3vh;
         left: 8vw;
     }
-
     .login-font{
         font-size: 3.8rem;
     }
-
     .forgot-pw-input {
         text-align: center;
         padding-left: 1rem;
         padding-right: 1rem;
     }
-
     .forgot-pw-input input {
         width: 70vw;
     }
-
     .forgot-pw-btn {
         width: 55vw;
         height: 6vh;
     }
-
     .pw-mobile {
         height: 6vh;
     }
-
     .reset-pw-mobile {
-
         font-family: 'Inter';
         font-style: normal;
         font-weight: bold;
@@ -509,24 +417,19 @@ body {
         align-items: center;
         font-size: 3rem;
     }
-
     @keyframes move-and-scale {
 
         0% {
             transform: translate(0, 0) scale(1);
         }
-
         100% {
             transform: translate(-34vw, -42vh) scale(0.2);
         }
     }
-
     .mobile-column{
         flex-direction: column-reverse;
     }
-
 }
-
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .forgot-pw {
         width: 730px;

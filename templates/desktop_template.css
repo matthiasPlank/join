@@ -6,12 +6,10 @@ body {
     margin: 0;
     height: 100%;
 }
-
 @font-face {
     font-family: 'Open Sans', sans-serif;
     src: url(fonts/Open_Sans/static/OpenSans-Regular.ttf)
 }
-
 #topbar-template {
     display: flex;
     height: 100px;
@@ -25,28 +23,23 @@ body {
     background-color: white;
     font-size: 22px;
 }
-
 #topbar-template .questionmark {
     vertical-align: middle;
     text-decoration: none;
 }
-
 #topbar-template .questionmark:hover {
     opacity: 0.7;
     cursor: pointer;
 }
-
 #topbar-template .avatar {
     vertical-align: middle;
     border-radius: 100%;
     margin-left: 15px ;
 }
-
 #topbar-template .avatar:hover {
     opacity: 0.7;
     cursor: pointer;
 }
-
 /*/-------------------- SIDEBAR TEMPLATE----------------/*/
 #sidebar-template {
     background-color: rgb(42, 54, 71);
@@ -58,16 +51,12 @@ body {
     right: 0;
     left: 0;
 }
-
 /*/------------------ SIDEBAR-TOP-------------------------/*/
-
 .sidebar-top {
     display: flex;
     justify-content: center;
     padding: 80px;
 }
-
-
 /*/------------------ SIDEBAR-MIDDLE--------------------/*/
 .sidebar-middle {
     display: flex;
@@ -77,91 +66,72 @@ body {
     margin-top: 30px;
     gap: 20px;
 }
-
 .sidebar-middle a {
     text-decoration: none;
     color: white;
     display: flex;
     align-items: center;
 }
-
 .sidebar-middle img {
     vertical-align: middle;
     margin-right: 5px;
 }
-
 /*/----------------- SUMMARY ( SIDEBAR MIDDLE ) -----------/*/
 .summary {
     width: 250px;
     height: 50px;
 }
-
 .summary:hover {
     background-color: rgb(9, 25, 49);
     cursor: pointer;
 }
-
 .summary-picture {
     margin-left: 65px;
 }
-
 .summary:active{
     background-color: rgb(9, 25, 49);
 }
-
 /*/----------------- CONTACTS ( SIDEBAR MIDDLE ) -----------/*/
 .contacts {
     width: 250px;
     height: 50px;
 }
-
 .contacts:hover {
     background-color: rgb(9, 25, 49);
     cursor: pointer;
 }
-
 .contacts-picture {
     margin-left: 65px;
 }
-
 /*/----------------- ADD TASK ( SIDEBAR MIDDLE ) -----------/*/
 .addTask {
     width: 250px;
     height: 50px;
 }
-
 .addTask:hover {
     background-color: rgb(9, 25, 49);
     cursor: pointer;
 }
-
 .addTask-picture {
     margin-left: 65px;
 }
-
 /*/----------------- BOARD ( SIDEBAR MIDDLE ) -----------/*/
 .board {
     width: 250px;
     height: 50px;
 }
-
 .board:hover {
     background-color: rgb(9, 25, 49);
     cursor: pointer;
 }
-
 .board-picture {
     margin-left: 65px;
 }
-
 .board:active {
     background-color: rgb(9, 25, 49);
 
 }
-
-
 /*/-------------------------- SIDEBAR-BOTTOM-------------/*/
-
 .sidebar-bottom {
     display: flex;
     justify-content: center;
@@ -170,21 +140,17 @@ body {
     margin-top: 150px;
     gap: 20px;
 }
-
 .sidebar-bottom img {
     vertical-align: middle;
     margin-right: 5px;
 }
-
 .sidebar-bottom a {
     text-decoration: none;
     color: white;
     display: flex;
     align-items: center;
 }
-
 /*/------------------- LOG OUT BUTTON --------------------/*/
-
 .logOut{
     background-color:rgb(42,54,71);
     position: fixed;
@@ -199,22 +165,18 @@ body {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
-
 .logOut a{
     text-decoration: none;
     color: white;
 }
-
 .logOut:hover{
     background-color:rgb(60, 72, 90);
     cursor: pointer;
 }
-
 .d-none{
     display: none !important;
 }
 /*/------------------- LOG OUT BUTTON MOBILE--------------------/*/
-
 .logOutMobile{
     background-color:rgb(42,54,71);
     position: fixed;
@@ -232,36 +194,28 @@ body {
     justify-content: center;
     align-items: flex-start;
 }
-
 .logOutMobile a{
     text-decoration: none;
     color: white;
     padding: 12px;
 }
-
 .logOutM.logOutMobile{
     background-color:rgb(60, 72, 90);
     cursor: pointer;
 }
-
-
 /*/-------------------------- DATENSCHUTZ ( SIDEBAR-BOTTOM ) -------------/*/
 .datenschutz {
     width: 250px;
     height: 50px;
 }
-
 .datenschutz:hover {
     background-color: rgb(9, 25, 49);
     cursor: pointer;
 }
-
 .datenschutz-picture {
     margin-left: 60px;
 }
-
 /*/---------------- MOBILE QUERRYS----------------/*/
-
 .sidebar-mobile{
     display: none;
     background-color: #333;
@@ -303,9 +257,6 @@ body {
 .mobileProjectInfo{
     display: none;
 }
-
-
-
 @media only screen and (max-width: 800px) {
     .addTask-picture{
         margin-left: 0px;
@@ -394,17 +345,11 @@ body {
         align-items: center;
         padding-left: 25px;
     }
-
-   
-
 }
-
-
 /*/-------------- EVENT LISTENER FOR LINKS ------------/*/
 .sidebar-middle a.active {
     background-color: darkblue;
-  }
-  
+}
 .sidebar-bottom a.active {
     background-color: darkblue;
-  }
+}

@@ -264,8 +264,8 @@ function editContact(index){
 }
 
 /**
- * Speichern eines editierten Kontakts.
- * @param {int} index -  Position des Kontakts im Array
+ * Saving an edited contact.
+ * @param {int} index -  Position of contact in the array
  */
 function saveEditedContact(index){
     let name = document.getElementById("contactOverlayName").value ; 
@@ -282,8 +282,8 @@ function saveEditedContact(index){
 } 
 
 /**
- * Löschen eines Kontakt im Bearbeitungsmodus. 
- * @param {int} index - Position des Kontakts im Array
+ * Delete a contact in edit mode.
+ * @param {int} index - Position of the contact in the array
  */
 function deleteEditedContact(index){
     contacts.splice(index, 1); 
@@ -294,8 +294,8 @@ function deleteEditedContact(index){
 }
 
 /**
- * Öffnet einen Kontakt in der mobilen Ansicht. 
- * @param {int} index - Position des Kontakts im Array
+ * Opens a contact in mobile view.
+ * @param {int} index - Position of the contact in the array
  */
 function openMobileVersion(index){
     document.getElementById("contactList").classList.add("dsp-none");
@@ -309,8 +309,8 @@ function openMobileVersion(index){
 }
 
 /**
- * Löscht einen ausgewählten Kontakt in der mobilen Ansicht.
- * @param {int} index - Position des Kontakts im Array
+ * Deletes a selected contact in mobile view.
+ * @param {int} index - Position of contact in the array
  */
 function deleteMobile(index){
     deleteEditedContact(index); 
@@ -318,8 +318,8 @@ function deleteMobile(index){
 }
 
 /**
- * Öffnet die edit-Oberfläche in der mobilen Ansicht
- * @param {int} index - Position des Kontakts im Array
+ * Opens the Edit interface in the mobile view
+ * @param {int} index - Position of contact in the array
  */
 function editMobile(index){
     document.getElementById("mobileEditBtn").classList.add("dsp-none");
@@ -328,7 +328,7 @@ function editMobile(index){
 }
 
 /**
- * Öffnet das AddTask-Overlay.
+ * Opens the AddTask overlay.
  */
 async function addNewTask(){
     await getContactsFromRemoteStorage();
@@ -340,7 +340,7 @@ async function addNewTask(){
 }
 
 /**
- * Schließt das Addtask-Overlay.
+ * Closes the Addtask overlay.
  */
 function closeAddNewTask(){
     document.getElementById("addNewTask").classList.add("dsp-none"); 

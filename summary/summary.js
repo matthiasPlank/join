@@ -4,7 +4,7 @@ let mobileWelcomeShowed = false ;
 
 
 /**
- * Initialisierung und laden der Daten vom Backend. Wird beim Öffnen der Summary aufgerufen.
+ * Initialization and loading of the data from the backend. Called when opening the summary.
  */
 async function loadTasks(){
     await getTasksFromLocalStorage(); 
@@ -15,7 +15,7 @@ async function loadTasks(){
 }
 
 /**
- * Setzt die Werte in der HTML Oberfläche.
+ * Sets the values ​​in the HTML interface.
  */
 function setItemValues(){
     document.getElementById("tasksInBoard").innerHTML = tasks.length ; 
@@ -28,7 +28,7 @@ function setItemValues(){
 }
 
 /**
- * Überprüft mit welchem User eingeloggt wurde und setzt den Namen als Begrüßung in der HTML Oberfläche. 
+ * Checks which user was logged in and sets the name as a greeting in the HTML interface.
  */
 function LogInCheck(){
   if (localStorage.getItem('username')) {
@@ -40,7 +40,7 @@ function LogInCheck(){
 }
 
 /**
- * Lädt die Tasks vom RemoteStorage/Backend.
+ * Loads the tasks from RemoteStorage/Backend.
  */
 async function getTasksFromLocalStorage(){ /* ACHTUNG: NUR TESTDATEN*/
         try {
@@ -53,8 +53,8 @@ async function getTasksFromLocalStorage(){ /* ACHTUNG: NUR TESTDATEN*/
 }
 
 /**
- * Ermittelt und gibt das nächste fällige Datum für "urgent-Taks" zurück.
- * @returns Datum als String
+ * Gets and returns the next due date for urgent taks.
+ * @returns Date as String
  */
 function getNextUrgentDate(){
   let urgent = tasks.filter(task => task.priority == "urgent"); 
@@ -77,13 +77,12 @@ function getNextUrgentDate(){
 }
 
 /**
- * Überprüft ob es sich sich um den ersten Aufruf der Summaryseite nach dem Login handelt und zeigt ggf. den Wilkommensbildschirm an. 
+ * Checks whether this is the first time the summary page has been called up after logging in and, if necessary, displays the welcome screen. 
  */
 function checkMobileLogin(){
   mobileWelcomeShowed = localStorage.getItem('login'); 
 
   if ( window.matchMedia('screen and (max-width: 800px)').matches && mobileWelcomeShowed === "true") {
- 
       localStorage.setItem('login', false); 
       document.getElementById("summaryWelcome").classList.remove("summaryWelcome");
       document.getElementById("summaryWelcome").classList.add("welcomeMobile");

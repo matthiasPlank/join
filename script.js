@@ -1,21 +1,15 @@
 /**
- * Ein Array zur Speicherung der Benutzerdaten.
+ * Array for storing user data.
  */
 let user = [];
-
 
 async function init() {
     loadUser();
     loadRememberMe();
-    /*
-    await setItem('user', JSON.stringify(user));
-    console.log("set empty user");
-    */ 
 }
 
-
 /**
- * Lädt die Benutzerdaten aus dem Backend.
+ * Loads the user data from the backend.
  */
 async function loadUser() {
     try {
@@ -26,17 +20,17 @@ async function loadUser() {
 }
 
 /**
- * Überprüft, ob eine E-Mail gültig ist.
- * Gibt true zurück, wenn die E-Mail gültig ist, andernfalls false.
+ * Check whether an email is valid. 
+ * Returns true when the email is valid, otherwise false.
  */
 function isValidEmail(email) {
     return email.includes('@');
   }
 
 
-  /**
- * Event-Listener, der aufgerufen wird, wenn das DOM geladen ist.
- * Elemente für Anmeldescreen, Registrierungsscreen, Passwort vergessen-Screen,Passwort ändern Screen.
+/**
+ * Eventlistener who is called when the DOM is loaded.
+ * Elements for registration screen, registration screen, password forgotten screen, password change screen.
  */
   let loginscreen, signupscreen, forgotPW1, changePW;
 
@@ -49,8 +43,8 @@ function isValidEmail(email) {
   });
 
 
-  /**
- * Öffnet eine bestimmte Seite basierend auf dem angegebenen Parameter.
+/**
+ * Opens a certain page based on the specified parameter.
  */
 function openPage(page) {
     if (page === "log-in") {
@@ -69,16 +63,15 @@ function openPage(page) {
     }
 }
 
-
-  /**
- * Führt eine Gastanmeldung durch.
+/**
+ * Carries out a gas application.
  */
 function guestLogin(){
        document.getElementById("summaryUsername").innerHTML = 'Guest'  ; 
 }
 
-  /**
- * Lädt das Registrierungsformular.
+/**
+ * Loads the registration form.
  */
 function loadSignUp() {
     loginscreen.style.display = 'none';
@@ -87,8 +80,8 @@ function loadSignUp() {
 }
 
 
-  /**
- * Zeigt den Bildschirm zum Zurücksetzen des Passworts an.
+/**
+ * Displays the screen to reset the password.
  */
 function forgotPW() {
     loginscreen.style.display = 'none';
@@ -97,7 +90,7 @@ function forgotPW() {
 }
 
 /**
-*Geht zurück zum Anmeldebildschirm.
+* Go back to the registration screen.
 */
 function back() {
     loginscreen.style.display = 'flex';
@@ -106,9 +99,8 @@ function back() {
     forgotPW1.style.display = 'none';
 }
 
-
 /**
-*Wechselt zur vorherigen Ansicht (Passwort ändern).
+* Switch to the previous view (change password).
 */
 function  backChange(){
     forgotPW1.style.display = 'flex';
@@ -116,7 +108,7 @@ function  backChange(){
 }
 
 /**
-*Setzt das Passwort zurück.
+* Set the password back.
 */
   function resetPW() {
     let emailInput = document.getElementById('email-forgot');
@@ -132,8 +124,8 @@ function  backChange(){
     }
   }
 
-  /**
-*Überprüft die E-Mail und zeigt Animationen an.
+/**
+* Check the email and indicate animations.
 */
 function emailCheck() {
   let animationInfo = document.getElementById('animation-info');
@@ -143,16 +135,15 @@ function emailCheck() {
   signupButton.style.display = 'none';
   changePW.style.display = 'flex';
 
-  // Füge den Event-Listener für 'animationend' hinzu
+  // Add the eventlistener for 'Animation'
   animationInfo.addEventListener('animationend', function() {
-    // Animation ist abgeschlossen
+    // Animation is complete
     animationInfo.style.display = 'none';
-  }, { once: true }); // { once: true } sorgt dafür, dass der Event-Listener nur einmalig ausgeführt wird
+  }, { once: true }); // { once: true } ensures that the eventlisterner is only executed once
 }
 
-
 /**
-*Überprüft das eingegebene Passwort und führt entsprechende Aktionen aus.
+* Checks the entered password.
 */
   function checkPW() {
     let newPasswordInput = document.getElementById('new-password');
@@ -180,7 +171,7 @@ function emailCheck() {
  
   
 /**
-*Überprüft den Login und führt entsprechende Aktionen aus.
+* Checks the login
 */
   function checkLogin() {
     let emailInput = document.getElementById('log-in-email');
@@ -198,7 +189,7 @@ function emailCheck() {
 
 
 /**
-Überprüft den Benutzer.
+* Verifies the user.
 */
   function userCheck(foundUser, emailInput, passwordInput){
     document.getElementById('current-user').textContent = '';
@@ -210,46 +201,37 @@ function emailCheck() {
     window.location.href = "./summary/summary.html";
   }
   
-
+/**
+ * Eventlistener when the DOM is loaded, to get HTML objects. 
+ */
 document.addEventListener('DOMContentLoaded', function () {
   let nameInput = document.getElementById('name');
   let email = document.getElementById('email');
   let password = document.getElementById('password');
   let registerBtn = document.getElementById('registerBtn');
 
-  /**
- * Registriert einen neuen Benutzer.
+/**
+ * Register a new user.
  */
   async function register() {
-    if (nameInput.value === '' || email.value === '' || password.value === '') {
+    if ( ( nameInput.value === '' || email.value === '' || password.value === '') || !isValidEmail(email.value) || isUserAlreadyRegistered(nameInput.value, email.value)){
       return;
     }
-
-    if (!isValidEmail(email.value)) {
-      return;
-    }
-
-    if (isUserAlreadyRegistered(nameInput.value, email.value)) {
-      return;
-    }
-
     registerBtn.disabled = true;
-
     user.push({
       name: nameInput.value,
       email: email.value,
       password: password.value,
     });
-
     await setItem('user', JSON.stringify(user));
     resetForm();
     loadUser();
     back();
   }
 
-  /**
- * Setzt das Formular zurück.
- */
+/**
+* Reset the form.
+*/
   function resetForm() {
     nameInput.value = '';
     email.value = '';
@@ -258,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 /**
- * Überprüft, ob ein Benutzer bereits registriert ist.
+ * Checks if a user is already registered.
  */
   function isUserAlreadyRegistered(name, email) {
     for (let i = 0; i < user.length; i++) {
@@ -268,12 +250,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     return false;
   }
-
   registerBtn.addEventListener('click', register);
 });
 
 /**
- * Zeige und verberge das Passwort.
+ * Show and hide the password.
  */
 function showPW(pages){
 
@@ -286,56 +267,58 @@ function showPW(pages){
 }
 
 /**
- * Speichern der Werte im Local Storage 
+ * Saving the values in the local storage. 
  */
 function login() {
-  let emailInput = document.getElementById('log-in-email');
-  let passwordInput = document.getElementById('log-in-pw');
-  let rememberMeCheckbox = document.getElementById('remember-me-checkbox');
 
-  let email = emailInput.value;
-  let password = passwordInput.value;
-  let rememberMe = rememberMeCheckbox.checked;
+  let email = document.getElementById('log-in-email').value;
+  let password = document.getElementById('log-in-pw').value;
+  let rememberMe = document.getElementById('remember-me-checkbox').checked;
 
-  // Überprüfen, ob E-Mail und Passwort eingegeben wurden
+  // Check whether email and password have been entered
   if (email && password && rememberMe) {
-    // Entfernen der vorherigen Einträge aus dem Local Storage
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
-    localStorage.removeItem('rememberMe');
-
-    // Speichern der neuen Werte im Local Storage
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
-    localStorage.setItem('rememberMe', rememberMe);
+    // Removing the previous entries from the local storage
+    removeItemsFromLocalStorage(); 
+    // Saving the new values in the local storage
+    setItemsToLocalStorage(email, password , rememberMe); 
   } else if(!rememberMe) {
-    // Entfernen der vorherigen Einträge aus dem Local Storage
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
-    localStorage.removeItem('rememberMe');
+    // Removing the previous entries from the local storage
+    removeItemsFromLocalStorage(); 
   }
 }
 
+/**
+ * Removes the email, password and remberMe item from the local storage. 
+ */
+function removeItemsFromLocalStorage(){
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    localStorage.removeItem('rememberMe');
+}
 
 /**
- * Aufrufen der Werte aus de Local Storage
+ * Sets the email, password and remberMe item to the local storage. 
+ */
+function setItemsToLocalStorage(email, password , rememberMe){
+  localStorage.setItem('email', email);
+  localStorage.setItem('password', password);
+  localStorage.setItem('rememberMe', rememberMe);
+}
+
+/**
+ * Calling up the values ​​from the local storage
  */
 function loadRememberMe(){
   let emailInput = document.getElementById('log-in-email');
   let passwordInput = document.getElementById('log-in-pw');
   let rememberMeCheckbox = document.getElementById('remember-me-checkbox');
 
-  // Überprüfen, ob gespeicherte Werte im Local Storage vorhanden sind
+  // Check whether saved values ​​are available in local storage
   if (localStorage.getItem('email') && localStorage.getItem('password') && localStorage.getItem('rememberMe')) {
-    // Werte aus dem Local Storage abrufen
-    let email = localStorage.getItem('email');
-    let password = localStorage.getItem('password');
-    let rememberMe = localStorage.getItem('rememberMe');
-
-    // Werte in die entsprechenden Felder einfügen
-    emailInput.value = email;
-    passwordInput.value = password;
-    rememberMeCheckbox.checked = (rememberMe === 'true');
+    // Get values ​​from local storage and set it in the HTML template. 
+    emailInput.value = localStorage.getItem('email');
+    passwordInput.value = localStorage.getItem('password');
+    rememberMeCheckbox.checked = (localStorage.getItem('rememberMe') === 'true');
   }
 }
 

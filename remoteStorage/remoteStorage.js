@@ -10,9 +10,9 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 */
 
 /**
- * Setzt einen Wert (value) im Backend.
- * @param {String} key - Name des "Felds" auf das im Backend zugegriffen werden soll.
- * @param {String} value - Wert der in das Feld/Key geschrieben werden soll.
+ * Sets a value in the backend.
+ * @param {String} key - Name of the "field" to be accessed in the backend.
+ * @param {String} value - Value to be written in the field/keyl.
  * @returns {String} 
  */
 async function setItem(key, value) {
@@ -25,9 +25,9 @@ async function setItem(key, value) {
 }
 
 /**
- * Liest einen Wert aus dem Backened vom übergeben Feld/Key aus und gibt diesen Wert als Rückgabeparameter zurück. 
- * @param {String} key -Name des "Felds" auf das im Backend zugegriffen werden soll.
- * @returns {String} - Gibt die Daten, welche aus dem Backend gelanden wurden zurück. 
+ * Reads a value from the baking from the handed over Field/Key and returns this value as a return parameter. 
+ * @param {String} key - Name of the "field" to which the backend should be accessed.
+ * @returns {String} - Gives the data that was made from the backend.
  */
 async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
