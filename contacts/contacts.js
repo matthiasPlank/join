@@ -2,7 +2,7 @@ let contacts = [];
 const remoteStorageKey = `contacts`;
 
 /**
- * Initialisierung bei aufruf der Kontaktseite. Kontakte aus Backend laden und HTML Code generieren. 
+ * Initialization when calling the contact page. Load the contacts from backend and generate HTML code.
  */
 async function loadContactList(){
     await getContactsFromRemoteStorage();
@@ -10,7 +10,7 @@ async function loadContactList(){
 }
 
 /**
- * Kontaktliste als HTML Code erstellen und anzeigen.
+ * Create and display the contact list as HTML code.
  */
 function renderContactList(){
     let letter = ""; 
@@ -22,31 +22,52 @@ function renderContactList(){
         const firstLetterLastName = contact.lastName.substring(0, 1).toUpperCase(); 
         if(letter != firstLetter) {
             letter = firstLetter; 
-            document.getElementById("contactList").innerHTML += /*html*/ `
+            generateContactListHTMLDivider(letter); 
+        }
+        generateContactHTMLTemplate(firstLetter , firstLetterLastName , contact.firstName , contact.lastName , contact.email , contact.bgIconColor, i); 
+    }
+}
+
+/**
+ * Generates the HTML template of the divider in the contactlist with a given letter.
+ * @param {String} letter - Letter for divider
+ */
+function generateContactListHTMLDivider(letter){
+    document.getElementById("contactList").innerHTML += /*html*/ `
                 <div>
                     <h3 class="contactLetter">${letter}</h3>
                     <hr class="contactLetterDivider">
                 </div>
-            `; 
-       }
-        document.getElementById("contactList").innerHTML += /*html*/ `
+    `; 
+}
+
+/**
+ * Generate the HTML template for a contact in the contactlist. 
+ * @param {String} firstLetter - first letter of the given name from the contact.
+ * @param {String} firstLetterLastName - fist letter of the last name from the contact. 
+ * @param {String} firstName - fist name of the contact. 
+ * @param {String} lastName - last name of the contact. 
+ * @param {String} email - email adress of the contact. 
+ * @param {String} bgIconColor - color code from the background color of the contact icon. 
+ * @param {number} i - index of the current iteration (contact). 
+ */
+function generateContactHTMLTemplate(firstLetter , firstLetterLastName , firstName , lastName , email , bgIconColor ,  i){
+    document.getElementById("contactList").innerHTML += /*html*/ `
             <div id="contactListItem" class="contactListItem" onClick="openContactDetails(${i})">
                 <div>
                     <div id="contactIcon${i}" class="contactIcon">${firstLetter}${firstLetterLastName}</div>
                 </div>
                 <div>
-                    <h3 class="contactName">${contact.firstName} ${contact.lastName}</h3>
-                    <a class="contactEmail" href= "mailto:${contact.email}">${contact.email}</a>
+                    <h3 class="contactName">${firstName} ${lastName}</h3>
+                    <a class="contactEmail" href= "mailto:${email}">${email}</a>
                 </div>
-               
             </div>
         `; 
-        document.getElementById("contactIcon"+i).style.backgroundColor = contact.bgIconColor; 
-    }
+        document.getElementById("contactIcon"+i).style.backgroundColor = bgIconColor; 
 }
 
 /**
- * Kontakte alphabetisch sortieren.
+ * Sorts contacts alphabetically.
  */
 function sortContact(){
     contacts = contacts.sort((a, b) => {
@@ -57,8 +78,8 @@ function sortContact(){
 }
 
 /**
- * Zufällige Hintergrundfarbe für Konktakt erstellen und diesem Zuweisen. 
- * @param {id} id - Position des Kontakts im Array
+ * Create random background color for a concert and assign it.
+ * @param {id} id - Position of contact in the array
  */
 function setContactIconBackground(id){
     let color = Math.floor(Math.random()*16777215).toString(16);
@@ -66,7 +87,7 @@ function setContactIconBackground(id){
 } 
 
 /**
- * Kontakte aus Backend/RemoteStorage laden. 
+ * Load contacts from backend/remotestorage.
  */
 async function getContactsFromRemoteStorage(){
     let resp =  await getItem(remoteStorageKey);
@@ -74,25 +95,37 @@ async function getContactsFromRemoteStorage(){
 }
 
 /**
- * Öffnen des selektierten Kontakts. 
- * @param {int} index -  Position des Kontakts im Array
+ * Opening the selected contact.
+ * @param {int} index -  Position of contact in the array
  */
 function openContactDetails(index){
-
     if (window.matchMedia('screen and (max-width: 800px) ').matches) {
         openMobileVersion(index); 
-    } else {
-
     }
     let contact = contacts[index]; 
     const firstLetter = contact.firstName.substring(0, 1); 
     const firstLetterLastName = contact.lastName.substring(0, 1); 
+    generateHTMLTemplateForOpenContactDetails(index , firstLetter , firstLetterLastName , contact.firstName , contact.lastName , contact.email , contact.tel , contact.bgIconColor); 
+}
+
+/**
+ * Generate the HTML template for a opened contact. 
+ * @param {number} index - index of the current iteration (contact). 
+ * @param {*} firstLetter - first letter of the given name from the contact.
+ * @param {*} firstLetterLastName - fist letter of the last name from the contact. 
+ * @param {*} firstName - fist name of the contact. 
+ * @param {*} lastName - last name of the contact. 
+ * @param {*} email - email adress of the contact. 
+ * @param {*} tel - phone number of the contact. 
+ * @param {*} bgIconColor - color code from the background color of the contact icon. 
+ */
+function generateHTMLTemplateForOpenContactDetails(index , firstLetter , firstLetterLastName , firstName , lastName , email , tel , bgIconColor){
     document.getElementById("selectedContact").innerHTML = /*html*/  `
     <div>
         <div class="contactDetailsName">
             <div class="contactDetailsIcon" id="contactDetailsIcon${index}">${firstLetter}${firstLetterLastName}</div>
             <div>
-                <h3>${contact.firstName} ${contact.lastName}</h3>
+                <h3>${firstName} ${lastName}</h3>
                 <a onclick="addNewTask()">
                     <img class="contactDetailsNamePlusIcon" src="../img/plus-icon-blue.png" alt="PlusIcon">  
                     <span class="contactDetailsNamePlusText">Add Task</span>
@@ -108,22 +141,21 @@ function openContactDetails(index){
         </div>
         <div  class="contactDetailsConatctMailTel">
             <h3>E-Mail</h3>
-            <a class="contactEmail" href= "mailto:${contact.email}">${contact.email}</a>
+            <a class="contactEmail" href= "mailto:${email}">${email}</a>
         </div>
         <div  class="contactDetailsConatctMailTel">
             <h3>Phone</h3>
-            <a class="contactEmail" href= "tel:${contact.tel}">${contact.tel}</a>
+            <a class="contactEmail" href= "tel:${tel}">${tel}</a>
         </div>
     </div>
     `;
-    document.getElementById("contactDetailsIcon"+index).style.backgroundColor = contact.bgIconColor; 
+    document.getElementById("contactDetailsIcon"+index).style.backgroundColor = bgIconColor; 
 }
 
 /**
- * Neuen Kontakt erstellen. Öffnete HTML Ansicht zur erstellung eine neuen Kontakts. 
+ * Create new contact. HTML viewed a new contact to create.
  */
 function addNewContact(){
-
     document.getElementById("openContact").classList.remove("dsp-none");
     document.getElementById("body").classList.add("overflow-hidden"); 
     document.getElementById("openContact").classList.add("openContact"); 
@@ -131,7 +163,7 @@ function addNewContact(){
 }
 
 /**
- * Erzeugen des HTML Code für die erstellung eine neuen Kontakts.
+ * Create the HTML code for creating a new contact.
  */
 function renderContactForm(){
     document.getElementById("openContact").innerHTML = /*html*/ `
@@ -176,8 +208,8 @@ function renderContactForm(){
 }
 
 /**
- * Neuen Kontakt erstellen. Erstellen eines neuen Kontakt mit anschließender 
- * speicherung im RemoteStorage und aktualisierung der HTML Oberfläche.
+ * Create new contact. Creating a new contact, save it in the 
+ * remote sorage and update of the HTML surface.
  */
 function addContact(){
     let name = document.getElementById("contactOverlayName").value ; 
@@ -186,32 +218,25 @@ function addContact(){
     let fullName = name.split(' '); 
     let firstName = fullName[0];
     let lastName = fullName[1];
-    if ( lastName == undefined){
-        lastName = ""; 
-    }
+    if ( lastName == undefined ? lastName = "" : ""); 
     let bgColor = '#' + Math.floor(Math.random()*16777215).toString(16);
 
-    contacts.push({
-        "firstName": `${firstName}`,
-        "lastName": `${lastName}`,
-        "email": `${email}`,
-        "tel": `${phone}`,
-        "bgIconColor": `${bgColor}`
-    })
+    contacts.push({ "firstName": `${firstName}`,"lastName": `${lastName}`,"email": `${email}`,"tel": `${phone}`,"bgIconColor": `${bgColor}`}); 
+
     setContactsToRemoteStorage(); 
     closeContactOverlay(); 
     renderContactList(); 
 }
 
 /**
- * Speichern der Kontakte im RemoteStorage/Backend. 
+ * Saving the contacts in the remoter storage/backend.
  */
 function setContactsToRemoteStorage(){
     let resp = setItem(remoteStorageKey , JSON.stringify(contacts)); 
 }
 
 /**
- * Schließen eines Kontakts in der mobilen Ansicht. 
+ * Closing a contact in the mobile view.
  */
 function closeContactOverlay(){
     document.getElementById("openContact").classList.add("dsp-none");
@@ -220,8 +245,8 @@ function closeContactOverlay(){
 }
 
 /**
- * Öffnen eines Kontakt zum bearbeiten. 
- * @param {int} index -Position des Kontakts im Array
+ * Open a contact to edit.
+ * @param {int} index -Position of contact in the array
  */
 function editContact(index){
     document.getElementById("openContact").classList.remove("dsp-none");

@@ -313,10 +313,8 @@ function removeHighlight(id) {
   document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
-
-
 /**
- * Zeigt alle Aufgaben im 'To Do'-Board an.
+ * Displays all tasks in the 'to do' board.
  */
 function showToDoBoard() {
   let toDo = tasks.filter(t => t['kanban'] == 'to-do');
@@ -340,7 +338,7 @@ function showInProgressBoard() {
 }
 
 /**
- * Zeigt alle Aufgaben im 'Awaiting Feedback'-Board an.
+ * Displays all tasks in the 'Awaiting Feedback' board.
  */
 function showAwaitingFeedbackBoard() {
   let awaitingFeedback = tasks.filter(t => t['kanban'] == 'awaiting-feedback');
@@ -352,7 +350,7 @@ function showAwaitingFeedbackBoard() {
 }
 
 /**
- * Zeigt alle Aufgaben im 'Done'-Board an.
+ * Displays all tasks in the 'Done' board.
  */
 function showDoneBoard() {
   let done = tasks.filter(t => t['kanban'] == 'done');
@@ -363,14 +361,13 @@ function showDoneBoard() {
   }
 }
 
-
 /**
- * Rückmeldung, dass eine Aufgabe umgeändert wurde.
+ * Feedback that a task has been changed.
  */
 function savedChangesReport() {
   document.getElementById('savedChanges').classList.remove('d-none');
   setTimeout(() => {
     document.getElementById('savedChanges').classList.add('d-none');
-  }, 2500); // Entfernt Meldung wieder nach 2 Sekunden.
+  }, 2500); // Removes the message again after 2,5 seconds.
 }
 
