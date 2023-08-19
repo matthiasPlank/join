@@ -29,7 +29,7 @@
             <div class="logo-page" id="login-screen" style="display:flex">
                 <div class="sign-up-container">
                     <span>Not a Join User?</span>
-                    <button class="log-btn mobile-btn" onclick="openPage('sign-up')">Sign up</button>
+                    <button type="button" class="log-btn mobile-btn" onclick="openPage('sign-up')">Sign up</button>
                 </div>
             </div>
             <div class="login-page" id="signup-screen" style="display:flex">
@@ -37,12 +37,15 @@
                     <span class="login-font">Log in</span>
                 </div>
                 <div class="login-input">
-                    <input id="log-in-email" name="email" class="input-mail" type="text" placeholder="E-mail" required
+                    <input id="log-in-email" name="email" class="input-mail" type="email" placeholder="E-mail" required
                         autocomplete="username">
                     <div>
                         <input id="log-in-pw" name="password" class="input-key" type="password" placeholder="Password"
                             required autocomplete="current-password">
                         <img onclick="showPW('log-in-pw')" class="keyIMG" src="./img/lock-icon.png">
+                    </div>
+                    <div>
+                        <p id="wrongCredentials" class="dsp-none wrongCredentials"><b>Username oder Passwort falsch!</b></Username></p>
                     </div>
                 </div>
                 <div class="flex-column gap-small">
@@ -58,8 +61,8 @@
                         </div>
                     </div>
                     <div class="flex gap mobile-column">
-                        <button onclick=" login();openPage('log-in')" class="log-btn">Log in</button>
-                        <button onclick="openPage('summary')" class="guest-log-btn">Guest Log in</button>
+                        <button type="button" onclick=" login();openPage('log-in')" class="log-btn">Log in</button>
+                        <button type="button" onclick="openPage('summary')" class="guest-log-btn">Guest Log in</button>
                     </div>
                 </div>
             </div>
@@ -71,7 +74,7 @@
                 <div onclick="openPage('back')">
                     <img class="left-arrow-img" src="./img/left-arrow-icon.png" alt="">
                 </div>
-                <span class="signInFont">Sign in</span>
+                <span class="signInFont">Sign up</span>
             </div>
             <div class="login-input">
                 <input id="name" name="name" class="input-name" required type="text" placeholder="name">

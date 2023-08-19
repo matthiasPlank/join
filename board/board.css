@@ -890,7 +890,7 @@ body::-webkit-scrollbar-thumb {
     }
     #content {
         margin-left: 0px;
-        margin-top: 60px;
+        margin-top: 90px;
         padding-bottom: 80px;
     }
     .board-header {
@@ -971,9 +971,9 @@ body::-webkit-scrollbar-thumb {
         gap: 10px;
     }
     .todo {
-        min-width: 42vh;
+        min-width: 42vw;
     }
     .kanban {
-        min-width: 45vh;
+        min-width: 45vw;
     }
 }

@@ -10,6 +10,9 @@ body {
         font-family: 'Inter var', sans-serif;
     }
 }
+.dsp-none{
+    display: none;
+}
 .logo-page {
     position: absolute;
     width: 100vw;
@@ -32,7 +35,6 @@ body {
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     z-index: 5;
-
 }
 .login-page {
     display: flex;
@@ -183,8 +185,8 @@ body {
     border-radius: 0.5rem;
     border: 1px solid #D1D1D1;
 }
-.input-mail {
-    background-image: url('/img/mail-icon.png');
+.input-mail{
+    background-image: url('img/mail-icon.png');
     background-position: right center;
     background-repeat: no-repeat;
     padding-right: 0.5rem;
@@ -340,10 +342,17 @@ body {
     height: 40px;
     border-radius: 0.5rem;
     border: 1px solid #D1D1D1;
+    margin-bottom: 12px;
+}
+.wrongCredentials{
+    color: red;
+    margin: 0px;
+    text-align: center;
 }
 @media only screen and (min-width: 320px) and (max-width: 767px) {
     .login-page {
         width: 86vw;
+        padding-bottom: 32px;
     }
     .forgotmypwFont{
         font-size: 1.8rem;

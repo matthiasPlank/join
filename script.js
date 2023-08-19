@@ -174,16 +174,17 @@ function emailCheck() {
 * Checks the login
 */
   function checkLogin() {
-    let emailInput = document.getElementById('log-in-email');
-    let passwordInput = document.getElementById('log-in-pw');
-    let email = emailInput.value;
-    let password = passwordInput.value;
+    let email = document.getElementById('log-in-email').value;
+    let password = document.getElementById('log-in-pw').value;
     let foundUser = user.find(function (user) {
       return user.email === email && user.password === password;
     });
-  
     if (foundUser) {
-        userCheck(foundUser, emailInput, passwordInput)
+        document.getElementById("wrongCredentials").classList.add("dsp-none"); 
+        userCheck(foundUser, email, password);
+    }
+    else{
+      document.getElementById("wrongCredentials").classList.remove("dsp-none"); 
     }
   }
 
