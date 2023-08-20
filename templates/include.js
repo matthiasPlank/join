@@ -92,3 +92,7 @@ function changeActivePage(event, pageName) {
   // Save the state of the active page to web storage
   localStorage.setItem("activePage", pageName);
 }
+
+function setMobileNavigationHighlighting(id){
+  document.getElementById(id).classList.add("mobileTabActiv"); 
+}

@@ -268,7 +268,7 @@ body::-webkit-scrollbar-thumb {
     width: 100vw;
     height: 100vh;
     background-color: rgba(211, 211, 211, 0.5);
-    z-index: 20;
+    z-index: 150;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -649,7 +649,7 @@ body::-webkit-scrollbar-thumb {
     .contactOverlay{
         overflow: scroll;
         flex-direction: column;
-        height: 80vh;
+        height: 90vh;
         width: 90vw;
     }
     .contactOverlayContentClose{

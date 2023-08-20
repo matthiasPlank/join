@@ -594,6 +594,12 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 24px;
 }
 
+.status-input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
 .date-input input:hover {
     cursor: pointer;
     background-color: rgb(248, 248, 248);
@@ -768,7 +774,18 @@ body::-webkit-scrollbar-thumb {
     width: 4vh;
     object-fit: cover;
 }
-
+select{
+    background: #ffffff;
+    padding: 3px;
+    font-size: 14px;
+    font-family: Arial;
+    border: 1px solid #ccc;
+    letter-spacing: 1px;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    width:100%;
+}
 /*/--------------------------- MEDIA QUERRYS -----------------------------/*/
 @media only screen and (max-width: 1900px) {
     .addNewTaskBackground {
@@ -843,18 +860,21 @@ body::-webkit-scrollbar-thumb {
     #in-progress {
         min-height: 20vh;
         display: flex;
+        flex-direction: column;
         gap: 24px;
         overflow: auto;
     }
     #awaiting-feedback {
         min-height: 20vh;
         display: flex;
+        flex-direction: column;
         gap: 24px;
         overflow: auto;
     }
     #done {
         min-height: 20vh;
         display: flex;
+        flex-direction: column;
         gap: 24px;
         overflow: auto;
     }
@@ -877,6 +897,7 @@ body::-webkit-scrollbar-thumb {
 
     #edit-task {
         left: 50%;
+        z-index: 150;
     }
     .kanbanboard {
         display: flex;

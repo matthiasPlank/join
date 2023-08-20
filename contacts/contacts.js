@@ -7,6 +7,7 @@ const remoteStorageKey = `contacts`;
 async function loadContactList(){
     await getContactsFromRemoteStorage();
     renderContactList();
+    setMobileNavigationHighlighting("mobileTabContacts"); 
 }
 
 /**

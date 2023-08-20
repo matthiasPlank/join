@@ -213,6 +213,14 @@ function editTaskHTML(element) {
             Date
             <input type="date" id="dateInput" value="${element["dueDate"]}">
         </div>
+        <div class="status-input">
+            <select>
+                <option value="1">ToDo</option>
+                <option value="2">In Progress</option>
+                <option value="3">Awaiting Feedback</option>
+                <option value="4">Done</option>
+            </select>
+        </div>
         <div class="priority-input">
             Prio
             <div class="edit-task-prio-buttons">

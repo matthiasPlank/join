@@ -11,7 +11,7 @@ async function loadTasks(){
     checkMobileLogin(); 
     setItemValues(); 
     LogInCheck();
-   
+    setMobileNavigationHighlighting("mobileTabSummary"); 
 }
 
 /**

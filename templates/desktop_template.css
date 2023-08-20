@@ -68,7 +68,7 @@ body {
 }
 .sidebar-middle a {
     text-decoration: none;
-    color: white;
+    color: #CDCDCD;
     display: flex;
     align-items: center;
 }
@@ -231,6 +231,7 @@ body {
 .sidebar-mobile a{
     text-decoration: none;
     color: white;
+    width: 25vw;
 }
 .sidebar-mobile a:hover{
     background-color: #091931;
@@ -256,6 +257,9 @@ body {
 }
 .mobileProjectInfo{
     display: none;
+}
+.mobileTabActiv{
+    background-color: rgb(9, 25, 49);
 }
 @media only screen and (max-width: 800px) {
     .addTask-picture{
@@ -314,6 +318,7 @@ body {
         margin: 0px;
         font-size: 16px;
         font-weight: 400;
+        color: #CDCDCD;
     }
     #sidebar-template{
         display: none;

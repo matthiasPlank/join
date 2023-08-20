@@ -14,6 +14,7 @@ async function loadArray() {
   await loadContacts();
   setMinDateAttribute();
   priorityMediumAddTask();
+  setMobileNavigationHighlighting("mobileTabAddTask"); 
 }
 
 /**
