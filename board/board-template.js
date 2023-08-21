@@ -214,11 +214,11 @@ function editTaskHTML(element) {
             <input type="date" id="dateInput" value="${element["dueDate"]}">
         </div>
         <div class="status-input">
-            <select>
-                <option value="1">ToDo</option>
-                <option value="2">In Progress</option>
-                <option value="3">Awaiting Feedback</option>
-                <option value="4">Done</option>
+            <select id="task-status-input">
+                <option value="to-do">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="awaiting-feedback">Awaiting Feedback</option>
+                <option value="done">Done</option>
             </select>
         </div>
         <div class="priority-input">

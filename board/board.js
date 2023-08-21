@@ -184,9 +184,26 @@ function editTask(id) {
   const element = tasks.find(task => task.id === id);
 
   currentTask.innerHTML = editTaskHTML(element);
+  setEditTaskStatus(element); 
   currentEditingIndex = tasks.findIndex(task => task.id === id);
 }
 
+/**
+ * Sets the status dropdown in the edit mode of a task.
+ * @param {Object} element - Task that should be edited.
+ */
+function setEditTaskStatus(element){
+  
+  let kanbanValue = element['kanban'];  
+  let selectElement = document.getElementById("task-status-input");
+  for (var i = 0; i < selectElement.options.length; i++) {
+    if (selectElement.options[i].value === kanbanValue) {
+        selectElement.options[i].selected = true;
+        break;
+    }
+  }
+
+}
 
 /**
  * Assigning the contacts for a task.
@@ -213,12 +230,14 @@ function saveChanges() {
   const title = document.getElementById('titleInput').value;
   const description = document.getElementById('descriptionInput').value;
   const dueDate = document.getElementById('dateInput').value;
+  const status = document.getElementById("task-status-input").value;
 
   //Check if the index is valid
   if (currentEditingIndex >= 0 && currentEditingIndex < tasks.length) {
     tasks[currentEditingIndex].title = title;
     tasks[currentEditingIndex].description = description;
     tasks[currentEditingIndex].dueDate = dueDate;
+    tasks[currentEditingIndex].kanban = status;
   }
   updateAssignedContacts();
   setBoardToRemoteStorage();
