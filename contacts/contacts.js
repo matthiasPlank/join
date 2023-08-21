@@ -331,13 +331,14 @@ function editMobile(index){
 /**
  * Opens the AddTask overlay.
  */
-async function addNewTask(){
+async function addNewTask(status){
     await getContactsFromRemoteStorage();
     await loadContacts();
     await showContacts();
     setMinDateAttribute();
     priorityMediumAddTask();
     document.getElementById("addNewTask").classList.remove("dsp-none"); 
+    document.getElementById("addNewTaskForm").setAttribute("onsubmit", "createTask('" + status + "');return false");
 }
 
 /**

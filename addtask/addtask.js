@@ -20,7 +20,7 @@ async function loadArray() {
 /**
  * Creates a new Task
  */
-async function createTask() {
+async function createTask(status) {
 
   let inputValues = getValuesForCreateTask(); 
 
@@ -31,7 +31,7 @@ async function createTask() {
     subtaskStatus.push(false); // Push false in das subtaskStatus-Array
   });
 
-  let newTask = createNewTask(inputValues, assigned , subtasks, subtaskStatus); 
+  let newTask = createNewTask(inputValues, assigned , subtasks, subtaskStatus, status); 
   tasks.push(newTask);
 
   setFieldsToStandard();
@@ -48,7 +48,7 @@ async function createTask() {
  * @param {Boolean[]} subtaskStatus 
  * @returns 
  */
-function createNewTask(inputValues, assigned , subtasks, subtaskStatus){
+function createNewTask(inputValues, assigned , subtasks, subtaskStatus, kanban){
     /**
    * @type {Object}
    */
@@ -59,7 +59,7 @@ function createNewTask(inputValues, assigned , subtasks, subtaskStatus){
       category:  inputValues[2],
       dueDate:  inputValues[3],
       assigned: assigned,
-      kanban: 'to-do',
+      kanban: kanban,
       priority:  inputValues[4],
       subtasks: subtasks,
       subtaskStatus: subtaskStatus // Array mit false-Werten für Subtask-Status

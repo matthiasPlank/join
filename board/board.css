@@ -892,7 +892,9 @@ select{
 @media only screen and (max-width: 800px) {
 
     #savedChanges {
-        left: 50%
+        left: unset;
+        right: 10px;
+        bottom: 150px;
     }
 
     #edit-task {
