@@ -255,7 +255,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /**
- * Show and hide the password.
+ *  Show and hide the password.
+ * @param {Object} pages - HTML element ID
  */
 function showPW(pages){
 

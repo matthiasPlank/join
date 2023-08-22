@@ -48,6 +48,8 @@ body {
     z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.04) 0px 0px 14px 3px;
     border-radius: 2rem;
+    height: fit-content;
+    padding-bottom: 24px;
 }
 .forgot-pw-page {
     position: absolute;
@@ -210,6 +212,9 @@ body {
     right: 7.8rem;
     margin-top: 0.8rem;
     cursor: pointer;
+    position: relative;
+    right: 32px;
+    top: 5px;
 }
 .input-key {
     background-position: right center;

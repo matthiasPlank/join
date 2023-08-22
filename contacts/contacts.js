@@ -271,16 +271,17 @@ function editContact(index){
 function saveEditedContact(index){
     let name = document.getElementById("contactOverlayName").value ; 
     let fullName = name.split(' '); 
-    let firstName = fullName[0];
-    let lastName = fullName[1];
+    let firstName = fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1);
+    let lastName = fullName[1].charAt(0).toUpperCase() + fullName[1].slice(1);
     contacts[index].firstName = firstName; 
     contacts[index].lastName = lastName; 
     contacts[index].email = document.getElementById("contactOverlayEmail").value ; 
     contacts[index].tel = document.getElementById("contactOverlayPhone").value ; 
     setContactsToRemoteStorage(); 
     closeContactOverlay(); 
-    renderContactList(); 
     openContactDetails(index);
+    renderContactList(); 
+   
 } 
 
 /**
