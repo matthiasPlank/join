@@ -440,6 +440,8 @@ body::-webkit-scrollbar-thumb {
 .mobileButtons img{ 
     width: 40px;
 }
+
+
 @media only screen and (max-width: 1200px) {
     .contactDetailHeader h1{
         font-size: 32px;

@@ -404,8 +404,7 @@ form {
 }
 
 /*/ --------------------REPORT FOR ADDED TASK------------------- /*/
-#successMessage {
-    
+#successMessage { 
     background-color: rgb(67, 80, 99);
     min-width: 350px;
     width: 400px;
@@ -413,9 +412,8 @@ form {
     color: white;
     border-radius: 10px;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 50px;
+    right: 50px;
 }
 
 
@@ -459,9 +457,8 @@ form {
     .task-date {
         margin-bottom: 32px !important;
     }
-
     #successMessage{
-        left: 60%;
+       display: none;
     }
 }
 
@@ -474,7 +471,8 @@ form {
 
 @media only screen and (max-width: 1000px) {
     #successMessage{
-        left: 65%;
+        bottom: 150px;
+        right: 30px;
     }
 }
 
@@ -497,11 +495,6 @@ form {
 
     .content {
         margin-left: 200px !important;
-    }
-
-
-    #successMessage{
-        left: 50%;
     }
 }
 
@@ -530,7 +523,9 @@ form {
 
 @media only screen and (max-width: 500px) {
     #successMessage{
-        width: 200px;
+        min-width: 100px;
+        max-width: 90vw;
+        width: auto;
     }
 
 }

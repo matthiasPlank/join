@@ -44,6 +44,18 @@ async function setBoardToRemoteStorage() {
 }
 
 /**
+ * Hidden function to remove all Tasks 
+ */
+async function setClearBoardToRemoteStorage() {
+  let emptyTasks = []; 
+  try {
+    await setItem(remoteStorageKeyTest, JSON.stringify(emptyTasks));
+  } catch (error) {
+    console.warn(error);
+  }
+}
+
+/**
  * Loads the tasks from the remote storage
  */
 async function getBoardFromRemoteStorage() {

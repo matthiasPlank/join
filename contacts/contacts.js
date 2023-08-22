@@ -127,7 +127,7 @@ function generateHTMLTemplateForOpenContactDetails(index , firstLetter , firstLe
             <div class="contactDetailsIcon" id="contactDetailsIcon${index}">${firstLetter}${firstLetterLastName}</div>
             <div>
                 <h3>${firstName} ${lastName}</h3>
-                <a onclick="addNewTask()">
+                <a onclick="addNewTask('to-do')">
                     <img class="contactDetailsNamePlusIcon" src="../img/plus-icon-blue.png" alt="PlusIcon">  
                     <span class="contactDetailsNamePlusText">Add Task</span>
                 </a>
