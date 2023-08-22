@@ -188,7 +188,7 @@ function renderContactForm(){
                         <div class="contactOverlayContentInputs">
                             <input required class="backgroundName" id="contactOverlayName" placeholder="Name" type="text">
                             <input required class="backgroundMail" id="contactOverlayEmail" placeholder="Email" type="email">
-                            <input required class="backgroundTel" id="contactOverlayPhone" placeholder="Phone" type="tel">
+                            <input required class="backgroundTel" id="contactOverlayPhone" placeholder="Phone" type="tel" pattern="[0-9]{6,12}">
                         </div>
                     </div>
                     <div class="contactOverlayButtons">
@@ -259,8 +259,8 @@ function editContact(index){
     document.getElementById("contactOverlayEmail").value = contacts[index].email; 
     document.getElementById("contactOverlayPhone").value = contacts[index].tel; 
     document.getElementById("contactOverlaySubmitButtonText").innerHTML = "Save"; 
-    document.getElementById("contactOverlayForm").onsubmit = function() {saveEditedContact(index)};
-    document.getElementById("contactOverlayCancleButton").onclick = function() {deleteEditedContact(index)};
+    document.getElementById("contactOverlayForm").setAttribute("onsubmit", "saveEditedContact(" + index + ");return false");
+    document.getElementById("contactOverlayCancleButton").setAttribute("onclick", "deleteEditedContact(" + index + ");return false");
     document.getElementById("contactOverlayCancleButtonText").innerHTML = "Delete"; 
 }
 
@@ -280,6 +280,7 @@ function saveEditedContact(index){
     setContactsToRemoteStorage(); 
     closeContactOverlay(); 
     renderContactList(); 
+    openContactDetails(index);
 } 
 
 /**
