@@ -481,8 +481,6 @@ form {
         margin-left: 100px;
         
     }
-
-   
 }
 
 @media only screen and (max-width: 800px) {
@@ -490,7 +488,7 @@ form {
     .addTask-container {
         margin-left: unset !important;
         margin-bottom: 100px !important;  
-        margin-top: 100px !important;
+        margin-top: 120px !important;
     }
 
     .content {

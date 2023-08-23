@@ -159,7 +159,6 @@ function changeSubtaskStatus(elementId, subtask, isChecked) {
   updateHTML();
 }
 
-
 /**
  * Closes a openend Task. 
  */
@@ -169,7 +168,6 @@ function closeTask() {
   let kanban = document.getElementById('kanban-board');
   kanban.classList.remove('blur');
 }
-
 
 /**
  * Deletes the current Task
@@ -198,6 +196,7 @@ function editTask(id) {
   currentTask.innerHTML = editTaskHTML(element);
   setEditTaskStatus(element); 
   currentEditingIndex = tasks.findIndex(task => task.id === id);
+  setPriority(element.priority); 
 }
 
 /**
@@ -214,7 +213,6 @@ function setEditTaskStatus(element){
         break;
     }
   }
-
 }
 
 /**
@@ -232,7 +230,6 @@ function updateAssignedContacts() {
 
   tasks[currentEditingIndex].assigned = assignedContacts;
 }
-
 
 /**
  * Save the task after it has been edited.
@@ -258,50 +255,33 @@ function saveChanges() {
   savedChangesReport();
 }
 
-
-
 /**
- * Sets the priority on "urgent".
+ * Sets the priority of the task to the given prio. 
+ * @param {String} prio - priority of the task
  */
-function priorityUrgent() {
-  document.getElementById('buttonUrgent').classList.add('urgent-background');
-  document.getElementById('urgent-image').src = "../img/urgent-symbol.png";
-  document.getElementById('buttonMedium').classList.remove('medium-background');
-  document.getElementById('medium-image').src = "../img/priority-medium.png";
-  document.getElementById('buttonLow').classList.remove('low-background');
-  document.getElementById('low-image').src = "../img/priority-low.png";
-  tasks[currentEditingIndex].priority = 'urgent';
+function setPriority(prio){
+  resetPriorityStyle(); 
+  const buttonElement = document.getElementById('button' + prio.charAt(0).toUpperCase() + prio.slice(1));
+  const imageElement = document.getElementById(prio + '-image');
+  if (buttonElement && imageElement) { 
+    const buttonClass = prio + '-background';
+    buttonElement.classList.add(buttonClass);
+    imageElement.src = "../img/" + prio + "-symbol.svg";
+  } 
+  tasks[currentEditingIndex].priority = prio;
 }
 
-
 /**
- * Sets the priority on "medium".
+ * Clears the "aktive" Style from all prio buttons in edit Task from board. 
  */
-function priorityMedium() {
-  document.getElementById('buttonMedium').classList.add('medium-background');
-  document.getElementById('medium-image').src = "../img/medium-symbol.svg";
-  document.getElementById('buttonUrgent').classList.remove('urgent-background');
-  document.getElementById('urgent-image').src = "../img/priority-urgent.png";
-  document.getElementById('buttonLow').classList.remove('low-background');
-  document.getElementById('low-image').src = "../img/priority-low.png";
-  tasks[currentEditingIndex].priority = 'medium';
-}
-
-
-/**
- * Sets the priority to "low".
- */
-function priorityLow() {
-  document.getElementById('buttonLow').classList.add('low-background');
-  document.getElementById('low-image').src = "../img/low-symbol.svg";
+function resetPriorityStyle(){
   document.getElementById('buttonUrgent').classList.remove('urgent-background');
   document.getElementById('urgent-image').src = "../img/priority-urgent.png";
   document.getElementById('buttonMedium').classList.remove('medium-background');
   document.getElementById('medium-image').src = "../img/priority-medium.png";
-  tasks[currentEditingIndex].priority = 'low';
+  document.getElementById('buttonLow').classList.remove('low-background');
+  document.getElementById('low-image').src = "../img/priority-low.png";
 }
-
-
 
 /**
  * The task for the drag-and-drop process is prepared.

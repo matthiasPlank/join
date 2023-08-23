@@ -49,7 +49,9 @@ body {
     box-shadow: rgba(0, 0, 0, 0.04) 0px 0px 14px 3px;
     border-radius: 2rem;
     height: fit-content;
-    padding-bottom: 24px;
+    padding-bottom: 24px;    
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 .forgot-pw-page {
     position: absolute;
@@ -371,6 +373,14 @@ body {
     border-radius: 3px;
     background-color: lightgray;
 }
+
+@media only screen and (max-width: 1400px) {
+    .sign-up-container {
+     z-index: 12;
+    }
+}
+
+
 @media only screen and (min-width: 320px) and (max-width: 767px) {
     .login-page {
         width: 86vw;

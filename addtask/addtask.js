@@ -13,7 +13,7 @@ async function loadArray() {
   await getContactsFromRemoteStorage();
   await loadContacts();
   setMinDateAttribute();
-  priorityMediumAddTask();
+  setAddTaskPriority("medium"); 
   setMobileNavigationHighlighting("mobileTabAddTask"); 
 }
 
@@ -89,7 +89,6 @@ function getValuesForCreateTask(){
   return [title, description, category, dueDate, priority]; 
 }
 
-
 /**
  * Get all subtasks from the HTML form an save it in an array für the task.
  * @param {String[]} subtasks - array for subtasks
@@ -103,7 +102,6 @@ function setSubtasks(subtasks) {
   }
 }
 
-
 /**
  * Resets the inpute fields after a new task was created. 
  */
@@ -115,7 +113,6 @@ function setFieldsToStandard() {
   document.getElementById('subtaskContainer').innerHTML = '';
 }
 
-
 /**
  * Resets the priority button after creating a new task. 
  */
@@ -124,7 +121,6 @@ function resetPriority() {
   document.getElementById('buttonMediumAddTask').classList.remove('medium-background');
   document.getElementById('buttonLowAddTask').classList.remove('low-background');
 }
-
 
 /**
  * Shows a message after creating a new task. 
@@ -152,7 +148,6 @@ function addSubtask() {
     document.getElementById('subtaskInput').value = '';
   }
 }
-
 
 /**
  * Loads all contacts from the contactlist.
@@ -194,7 +189,6 @@ function showContacts() {
 
 }
 
-
 /**
  * Add and removes the selected contacts for a task
  * @param {HTMLInputElement} checkbox - checkbox element
@@ -211,7 +205,6 @@ function handleContactCheckboxChange(checkbox, index) {
   }
 }
 
-
 /**
  * Updates the array of contacts. 
  * @param {Object} contact 
@@ -223,7 +216,6 @@ function updateAssignedArray(contact) {
   }
 }
 
-
 /**
  * Resets checkboxes after creating a new Task.
  */
@@ -233,7 +225,6 @@ function resetCheckboxes() {
     checkboxes[i].checked = false;
   }
 }
-
 
 /**
  * Generates a uniqe ID. 
@@ -246,45 +237,32 @@ function generateUniqueId() {
   return uniqueId;
 }
 
+/**
+ * Sets the priority of the task to the given prio. 
+ * @param {String} prio - priority of the task
+ */
+function setAddTaskPriority(prio){
+  priorityRemovePrioAllAddTaks(); 
+  const buttonElement = document.getElementById('button' + prio.charAt(0).toUpperCase() + prio.slice(1) + 'AddTask');
+  const imageElement = document.getElementById(prio + '-image');
+  if (buttonElement && imageElement) { 
+    const buttonClass = prio + '-background';
+    buttonElement.classList.add(buttonClass);
+    imageElement.src = "../img/" + prio + "-symbol.svg";
+  } 
+}
 
 /**
- * Sets the priority to "urgent" for the creating Task. 
+ * Removes the "aktiv" Style from all prio buttons. 
  */
-function priorityUrgentAddTask() {
-  document.getElementById('buttonUrgentAddTask').classList.add('urgent-background');
-  document.getElementById('urgent-image').src = "../img/urgent-symbol.png";
+function priorityRemovePrioAllAddTaks(){
+  document.getElementById('buttonUrgentAddTask').classList.remove('urgent-background');
+  document.getElementById('urgent-image').src = "../img/priority-urgent.png";
   document.getElementById('buttonMediumAddTask').classList.remove('medium-background');
   document.getElementById('medium-image').src = "../img/priority-medium.png";
   document.getElementById('buttonLowAddTask').classList.remove('low-background');
   document.getElementById('low-image').src = "../img/priority-low.png";
 }
-
-
-/**
- *  Sets the priority to "medium" for the creating Task. 
- */
-function priorityMediumAddTask() {
-  document.getElementById('buttonMediumAddTask').classList.add('medium-background');
-  document.getElementById('medium-image').src = "../img/medium-symbol.svg";
-  document.getElementById('buttonUrgentAddTask').classList.remove('urgent-background');
-  document.getElementById('urgent-image').src = "../img/priority-urgent.png";
-  document.getElementById('buttonLowAddTask').classList.remove('low-background');
-  document.getElementById('low-image').src = "../img/priority-low.png";
-}
-
-
-/**
-* Sets the priority to "low" for the creating Task. 
-*/
-function priorityLowAddTask() {
-  document.getElementById('buttonLowAddTask').classList.add('low-background');
-  document.getElementById('low-image').src = "../img/low-symbol.svg";
-  document.getElementById('buttonUrgentAddTask').classList.remove('urgent-background');
-  document.getElementById('urgent-image').src = "../img/priority-urgent.png";
-  document.getElementById('buttonMediumAddTask').classList.remove('medium-background');
-  document.getElementById('medium-image').src = "../img/priority-medium.png";
-}
-
 
 /**
  * Sets a minumum date.
@@ -324,7 +302,6 @@ document.addEventListener('click', function(event) {
   }
 
 });
-
 
 /**
  * Evenetlistener for check "enter" key to add a new subtask

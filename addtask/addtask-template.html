@@ -3,7 +3,7 @@
 </div>
 
 <div class="addTask-content">
-    <form id="addNewTaskForm" onsubmit="createTask();return false">
+    <form id="addNewTaskForm" onsubmit="createTask('to-do');return false">
 
         <!-- ADD TASK LEFT SIDE-->
         <div class="addTask-leftSide">
@@ -63,11 +63,11 @@
             <div class="task-priority">
                 <span><b>Prio</b></span>
                 <div class="task-priority-buttons">
-                    <button id="buttonUrgentAddTask" onclick="priorityUrgentAddTask()" type="button">urgent<img id="urgent-image"
+                    <button id="buttonUrgentAddTask" onclick="setAddTaskPriority('urgent')" type="button">urgent<img id="urgent-image"
                             src="../img/priority-urgent.png"> </button>
-                    <button id="buttonMediumAddTask" onclick="priorityMediumAddTask()" type="button">medium<img id="medium-image"
+                    <button id="buttonMediumAddTask" onclick="setAddTaskPriority('medium')" type="button">medium<img id="medium-image"
                             src="../img/priority-medium.png"> </button>
-                    <button id="buttonLowAddTask" onclick="priorityLowAddTask()" type="button">low<img id="low-image"
+                    <button id="buttonLowAddTask" onclick="setAddTaskPriority('low')" type="button">low<img id="low-image"
                             src="../img/priority-low.png">
                     </button>
                 </div>
