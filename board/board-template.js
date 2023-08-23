@@ -225,9 +225,9 @@ function editTaskHTML(element) {
         <div class="priority-input">
             Prio
             <div class="edit-task-prio-buttons">
-            <button id="buttonUrgent" onclick="setPriority('urgent')"> Urgent <img id="urgent-image" src="../img/priority-urgent.png"></button>
-            <button id="buttonMedium" onclick="setPriority('medium')"> Medium <img id="medium-image" src="../img/priority-medium.png"></button>
-            <button id="buttonLow" onclick="setPriority('low')"> Low <img id="low-image" src="../img/priority-low.png"></button>
+            <button id="buttonUrgent" onclick="setPriority('urgent')"> Urgent <img id="urgent-image-edit" src="../img/priority-urgent.png"></button>
+            <button id="buttonMedium" onclick="setPriority('medium')"> Medium <img id="medium-image-edit" src="../img/priority-medium.png"></button>
+            <button id="buttonLow" onclick="setPriority('low')"> Low <img id="low-image-edit" src="../img/priority-low.png"></button>
             </div>
         </div>
         <div class="assigned-box">

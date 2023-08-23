@@ -56,6 +56,21 @@ async function setClearBoardToRemoteStorage() {
 }
 
 /**
+ * Hidden function to remove all tasks without a valid kanban entry
+ */
+async function clearBoardFromTaskWithoutKanban(){
+  let newTasks = []; 
+  tasks.forEach(task => {
+    if(task.kanban === undefined){}
+    else{
+      newTasks.push(task); 
+    }
+  });
+  tasks = newTasks; 
+  setBoardToRemoteStorage(); 
+}
+
+/**
  * Loads the tasks from the remote storage
  */
 async function getBoardFromRemoteStorage() {
@@ -124,8 +139,9 @@ function showFilteredTasks(filteredTasks) {
  */
 function openTask(elementId) {
   let currentTask = document.getElementById('edit-task');
-  let kanban = document.getElementById('kanban-board');
-
+  let kanban = document.getElementById('content');
+  let blockerPanel = document.getElementById('blockerPanel');
+  
   let date = new Date("July 21");
 
   // Search Task by ID
@@ -136,6 +152,7 @@ function openTask(elementId) {
 
   currentTask.classList.remove('d-none');
   kanban.classList.add('blur');
+  blockerPanel.classList.remove('d-none');
 }
 
 /**
@@ -164,9 +181,11 @@ function changeSubtaskStatus(elementId, subtask, isChecked) {
  */
 function closeTask() {
   let currentTask = document.getElementById('edit-task');
+  let blockerPanel = document.getElementById('blockerPanel');
   currentTask.classList.add('d-none');
-  let kanban = document.getElementById('kanban-board');
+  let kanban = document.getElementById('content');
   kanban.classList.remove('blur');
+  blockerPanel.classList.add('d-none');
 }
 
 /**
@@ -262,7 +281,7 @@ function saveChanges() {
 function setPriority(prio){
   resetPriorityStyle(); 
   const buttonElement = document.getElementById('button' + prio.charAt(0).toUpperCase() + prio.slice(1));
-  const imageElement = document.getElementById(prio + '-image');
+  const imageElement = document.getElementById(prio + '-image-edit');
   if (buttonElement && imageElement) { 
     const buttonClass = prio + '-background';
     buttonElement.classList.add(buttonClass);

@@ -410,6 +410,7 @@ body::-webkit-scrollbar-thumb {
     max-height: 80vh;
     overflow: auto;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    z-index: 10; 
 }
 
 #edit-task::-webkit-scrollbar {
@@ -444,6 +445,7 @@ body::-webkit-scrollbar-thumb {
 
 .blur {
     filter: blur(4px);
+    position: fixed;
 }
 
 .assigned {
@@ -785,6 +787,14 @@ select{
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     width:100%;
+}
+#blockerPanel{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
 }
 /*/--------------------------- MEDIA QUERRYS -----------------------------/*/
 @media only screen and (max-width: 1900px) {

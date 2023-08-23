@@ -338,7 +338,7 @@ async function addNewTask(status){
     await loadContacts();
     await showContacts();
     setMinDateAttribute();
-    priorityMediumAddTask();
+    setAddTaskPriority("medium"); 
     document.getElementById("addNewTask").classList.remove("dsp-none"); 
     document.getElementById("addNewTaskForm").setAttribute("onsubmit", "createTask('" + status + "');return false");
 }
