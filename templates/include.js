@@ -94,5 +94,5 @@ function changeActivePage(event, pageName) {
 }
 
 function setMobileNavigationHighlighting(id){
-  document.getElementById(id).classList.add("mobileTabActiv"); 
+  document.getElementById(id).classList.add("mobileTabActiv");
 }

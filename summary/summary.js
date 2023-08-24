@@ -25,6 +25,7 @@ function setItemValues(){
     document.getElementById("tasksToDo").innerHTML = tasks.filter(task => task.kanban == "to-do").length; 
     document.getElementById("tasksDone").innerHTML = tasks.filter(task => task.kanban == "done").length; 
     setMobileNavigationHighlighting("mobileTabSummary"); 
+    setMobileNavigationHighlighting("summaryNavTab"); 
 }
 
 /**

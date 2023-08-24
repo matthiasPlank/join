@@ -2,7 +2,11 @@
     margin-left: 300px;
     margin-top: 150px;
 }
-
+::placeholder{
+    position: relative;
+    left: 0px;
+    top: 0px;
+} 
 body {
     font-family: 'Open Sans', sans-serif;
     background-color: rgb(245, 245, 245);
@@ -101,12 +105,22 @@ body::-webkit-scrollbar-thumb {
     padding: 10px 20px;
     border-radius: 20px;
 }
+.find-task input::placeholder{
+    position: relative;
+    left: -10px;
+    top: 0px;
+} 
+.addNewTaskBackground input::placeholder{
+    position: relative;
+    left: -10px;
+    top: 0px;
+}
 
 .add-task-button {
     padding: 12px 24px 12px 24px;
     background-color: rgb(42, 54, 71);
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 10px;
     border: unset;
     margin-left: 20px;
@@ -715,7 +729,7 @@ body::-webkit-scrollbar-thumb {
 
 /*/---------------- SUBTASK-------------/*/
 .ladebalken {
-    width: 160px;
+    width: 140px;
     height: 10px;
     background-color: #f2f2f2;
     border-radius: 4px;
@@ -724,7 +738,8 @@ body::-webkit-scrollbar-thumb {
 .loading-box {
     display: flex;
     align-items: center;
-    width: 225px
+    width: 225px; 
+    gap:12px; 
 }
 
 .progress-bar {

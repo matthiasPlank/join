@@ -15,6 +15,7 @@ async function loadArray() {
   setMinDateAttribute();
   setAddTaskPriority("medium"); 
   setMobileNavigationHighlighting("mobileTabAddTask"); 
+  setMobileNavigationHighlighting("addTaskNavTab"); 
 }
 
 /**

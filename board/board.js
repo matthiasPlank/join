@@ -30,6 +30,7 @@ async function loadBoard() {
   await getContactsFromRemoteStorage();
   updateHTML();
   setMobileNavigationHighlighting("mobileTabBoard"); 
+  setMobileNavigationHighlighting("boardNavTab"); 
 }
 
 /**
