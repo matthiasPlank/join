@@ -11,6 +11,10 @@ async function loadTasks(){
     checkMobileLogin(); 
     setItemValues(); 
     LogInCheck();
+    setTimeout(() => {
+      setMobileNavigationHighlighting("mobileTabSummary"); 
+      setMobileNavigationHighlighting("summaryNavTab"); 
+    }, 100);
 }
 
 /**
@@ -24,8 +28,7 @@ function setItemValues(){
     document.getElementById("taskUrgentDate").innerHTML = getNextUrgentDate();  
     document.getElementById("tasksToDo").innerHTML = tasks.filter(task => task.kanban == "to-do").length; 
     document.getElementById("tasksDone").innerHTML = tasks.filter(task => task.kanban == "done").length; 
-    setMobileNavigationHighlighting("mobileTabSummary"); 
-    setMobileNavigationHighlighting("summaryNavTab"); 
+ 
 }
 
 /**
