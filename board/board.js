@@ -404,3 +404,6 @@ function savedChangesReport() {
   }, 2500); // Removes the message again after 2,5 seconds.
 }
 
+function stopClose(event){
+  event.stopPropagation();
+}

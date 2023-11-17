@@ -4,6 +4,8 @@
  */
 let assigned = []; 
 
+let task = []; 
+
 /**
  * Loads tasks and contacts from the remote storage
  * @returns {Promise<void>}
@@ -39,6 +41,7 @@ async function createTask(status) {
   resetPriority();
   setBoardToRemoteStorage();
   taskAddedReport();
+
 }
 
 /**
@@ -353,5 +356,22 @@ function formatDate(date) {
 }
 
 function renderSelectedContacts(){
-  document.getElementById('showAssignedContacts').innerHTML = "show selected Contacts"; 
+
+ // document.getElementById('showAssignedContacts').innerHTML = generateContactsForTodoHTML(""task""); 
+
+ let HTMLTemplate = "<div id='selectedContacts'>"; 
+ for (let i = 0; i < assigned.length && assigned[i] != null; i++) {
+     let contactFirstName = assigned[i]['firstName'];
+     let contactFirstNameLetter = contactFirstName.charAt(0);
+     let contactLastName = assigned[i]['lastName'];
+     let contactLastNameLetter = contactLastName.charAt(0);
+     let contactBackground = assigned[i]['bgIconColor'];
+
+     if (i < 3) {
+         HTMLTemplate += `<div class="contactIcon" style="background-color: ${contactBackground};">${contactFirstNameLetter}${contactLastNameLetter}</div>`;
+     } else {
+         remainingCount++;
+     }
+ }
+ document.getElementById('showAssignedContacts').innerHTML = HTMLTemplate + "</div>"; 
 }

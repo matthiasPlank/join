@@ -423,7 +423,6 @@ form {
 }
 
 
-
 .d-none {
     display: none;
 }
@@ -435,6 +434,12 @@ form {
     object-fit: contain;
     vertical-align: middle;
     margin-left: 24px;
+}
+
+#selectedContacts{
+    padding-top: 12px;
+    display: flex;
+    flex-direction: row;
 }
 
 /*/--------------- MEDIA QUERRY -------------------------/*/

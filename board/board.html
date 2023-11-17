@@ -24,8 +24,8 @@
 <body onload="includeHTML(); loadBoard()" id="board">
     <div w3-include-html="../templates/desktop_template.html"></div>
 
-    <div id="addNewTask" class="dsp-none">
-        <div class="addNewTaskBackground customScroll">
+    <div id="addNewTask" class="dsp-none" onclick="clearAddTaskForm()">
+        <div class="addNewTaskBackground customScroll" onclick="stopClose(event)">
             <div id="addNewTaskClose">
                 <img onclick="closeAddNewTask()" src="../img/close-task.png" alt="close">
             </div>
@@ -77,12 +77,12 @@
             </div>
         </div>
     </div>
-    <div id="edit-task" class="d-none">
+    <div id="edit-task" class="d-none" onclick="stopClose(event)">
     </div>
     <div id="savedChanges" class="d-none slide-in-bottom">
         Your changes have been saved! <img src="../img/savedChanges.png">
     </div>
-    <div id="blockerPanel" class="d-none"></div>
+    <div id="blockerPanel" class="d-none" onclick="closeTask()"></div>
 </body>
 
 </html>
