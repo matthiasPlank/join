@@ -365,6 +365,7 @@ function showInProgressBoard() {
   document.getElementById('in-progress').innerHTML = '';
   for (let index = 0; index < inProgress.length; index++) {
     let element = inProgress[index];
+    console.log(element);
     document.getElementById('in-progress').innerHTML += generateTodoHTML(element);
   }
 }

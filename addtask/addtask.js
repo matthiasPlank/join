@@ -188,6 +188,14 @@ function showContacts() {
   let contacts = document.getElementById('assignedCheckboxContainer');
   if (contacts.classList.contains('border-bottom') ? contacts.classList.remove('border-bottom') : contacts.classList.add('border-bottom') ) ;
 
+  let assignedContacts = document.getElementById('showAssignedContacts');
+  if ( assignedContacts.classList.contains('d-none')){
+      assignedContacts.classList.remove('d-none') ;
+      renderSelectedContacts(); 
+  } 
+  else {  
+      assignedContacts.classList.add('d-none') 
+  }
 }
 
 /**
@@ -342,4 +350,8 @@ function formatDate(date) {
   var month = ('0' + (date.getMonth() + 1)).slice(-2);
   var day = ('0' + date.getDate()).slice(-2);
   return year + '-' + month + '-' + day;
+}
+
+function renderSelectedContacts(){
+  document.getElementById('showAssignedContacts').innerHTML = "show selected Contacts"; 
 }

@@ -40,7 +40,7 @@ function generateTodoHTML(element) {
  */
 function generateContactsForTodoHTML(element){
     let HTMLTemplate = ""; 
-    for (let i = 0; i < element['assigned'].length; i++) {
+    for (let i = 0; i < element['assigned'].length && element['assigned'][i] != null; i++) {
         let contactFirstName = element['assigned'][i]['firstName'];
         let contactFirstNameLetter = contactFirstName.charAt(0);
         let contactLastName = element['assigned'][i]['lastName'];
@@ -151,7 +151,7 @@ function openTaskHTML(element) {
  */
 function generateContactsForOpenTaskHTML(element){
     let template = ""; 
-    for (let i = 0; i < element['assigned'].length; i++) {
+    for (let i = 0; i < element['assigned'].length && element['assigned'][i] != null; i++) {
 
         let contactFirstName = element['assigned'][i]['firstName'];
         let contactFirstNameLetter = contactFirstName.charAt(0);
