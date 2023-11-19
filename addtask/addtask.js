@@ -181,7 +181,7 @@ function showContacts() {
 
   let labels = document.getElementsByClassName('label');
   let container = document.getElementById('selectContacts');
-
+  
   if (container.classList.contains('bordernone') ? container.classList.remove('bordernone') : container.classList.add('bordernone') ) ; 
 
   for (let i = 0; i < labels.length; i++) {
@@ -191,6 +191,7 @@ function showContacts() {
   let contacts = document.getElementById('assignedCheckboxContainer');
   if (contacts.classList.contains('border-bottom') ? contacts.classList.remove('border-bottom') : contacts.classList.add('border-bottom') ) ;
 
+  /*
   let assignedContacts = document.getElementById('showAssignedContacts');
   if ( assignedContacts.classList.contains('d-none')){
       assignedContacts.classList.remove('d-none') ;
@@ -199,6 +200,7 @@ function showContacts() {
   else {  
       assignedContacts.classList.add('d-none') 
   }
+  */
 }
 
 /**
@@ -208,6 +210,7 @@ function showContacts() {
  */
 function handleContactCheckboxChange(checkbox, index) {
   let selectedContact = contacts[index];
+  
 
   if (checkbox.checked) {
     assigned.push(selectedContact);
@@ -215,6 +218,7 @@ function handleContactCheckboxChange(checkbox, index) {
     let contactIndex = assigned.findIndex((contact) => contact === selectedContact);
     assigned.splice(contactIndex, 1);
   }
+  renderSelectedContacts(); 
 }
 
 /**
