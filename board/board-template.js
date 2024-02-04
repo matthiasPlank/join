@@ -40,6 +40,7 @@ function generateTodoHTML(element) {
  */
 function generateContactsForTodoHTML(element){
     let HTMLTemplate = ""; 
+    let remainingCount = 0;
     for (let i = 0; i < element['assigned'].length && element['assigned'][i] != null; i++) {
         let contactFirstName = element['assigned'][i]['firstName'];
         let contactFirstNameLetter = contactFirstName.charAt(0);
